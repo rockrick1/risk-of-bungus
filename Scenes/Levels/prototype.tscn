@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://coue2qehpn4fr"]
+[gd_scene load_steps=19 format=3 uid="uid://coue2qehpn4fr"]
 
 [ext_resource type="Texture2D" uid="uid://b8q44ipg8a3cq" path="res://Assets/Textures/Black.png" id="1_hwes2"]
 [ext_resource type="Texture2D" uid="uid://doyodkg1ds7td" path="res://Assets/Textures/Sky.png" id="1_rrvcb"]
 [ext_resource type="PackedScene" uid="uid://cr2ersq7g6q6f" path="res://Scenes/Characters/player.tscn" id="2_1g73n"]
 [ext_resource type="Texture2D" uid="uid://gwt4mrbmdv01" path="res://Assets/Textures/Orange.png" id="2_087ax"]
 [ext_resource type="Texture2D" uid="uid://dkpqh8de7tb3n" path="res://Assets/Textures/Green.png" id="3_qkav0"]
+[ext_resource type="Texture2D" uid="uid://6wofk4ae5yf3" path="res://Assets/Textures/White.png" id="6_dtq1q"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6c4vd"]
 panorama = ExtResource("1_rrvcb")
@@ -78,7 +79,7 @@ mesh = SubResource("BoxMesh_plpqy")
 shape = SubResource("ConcavePolygonShape3D_v7prx")
 
 [node name="Slope" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, 4)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.61096, 1, 11.7306)
 mesh = SubResource("PrismMesh_0l7qq")
 surface_material_override/0 = SubResource("StandardMaterial3D_pfpgv")
 
@@ -88,3 +89,30 @@ surface_material_override/0 = SubResource("StandardMaterial3D_pfpgv")
 shape = SubResource("ConcavePolygonShape3D_rit6o")
 
 [node name="Player" parent="." instance=ExtResource("2_1g73n")]
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="UI" type="Control" parent="UILayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Crosshair" type="Control" parent="UILayer/UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="UILayer/UI/Crosshair"]
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("6_dtq1q")

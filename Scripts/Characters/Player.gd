@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-const LERP_VALUE : float = 0.15
+const LERP_VALUE : float = 0.25
 
 var snap_vector : Vector3 = Vector3.DOWN
 var speed : float
@@ -16,6 +16,12 @@ const ANIMATION_BLEND : float = 7.0
 @onready var player_mesh : Node3D = $Mesh
 @onready var spring_arm_pivot : Node3D = $SpringArmPivot
 @onready var animator : AnimationTree = $AnimationTree
+@onready var skeleton : Skeleton3D = $Mesh/Armature/Skeleton3D
+@onready var weapon = $Weapon
+@onready var weapon_streaks : GPUParticles3D = $Mesh/Armature/Skeleton3D/NeckBone/WeaponStreaks
+
+func _ready():
+	weapon.shot_fired.connect(_on_shot_fired)
 
 func _physics_process(delta):
 	var move_direction : Vector3 = Vector3.ZERO
@@ -48,6 +54,10 @@ func _physics_process(delta):
 	move_and_slide()
 	animate(delta)
 
+var started = false
+func _process(_delta) -> void:
+	pass
+
 func animate(delta):
 	if is_on_floor():
 		animator.set("parameters/ground_air_transition/transition_request", "grounded")
@@ -61,3 +71,6 @@ func animate(delta):
 			animator.set("parameters/iwr_blend/blend_amount", lerp(animator.get("parameters/iwr_blend/blend_amount"), -1.0, delta * ANIMATION_BLEND))
 	else:
 		animator.set("parameters/ground_air_transition/transition_request", "air")
+
+func _on_shot_fired():
+	print("shotFired!")
