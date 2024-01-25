@@ -65,6 +65,8 @@ shadow_enabled = true
 mesh = SubResource("PlaneMesh_mmup0")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+collision_layer = 16
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_26ptr")
@@ -74,6 +76,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -3)
 mesh = SubResource("BoxMesh_plpqy")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Wall"]
+collision_layer = 16
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_v7prx")
@@ -84,14 +88,17 @@ mesh = SubResource("PrismMesh_0l7qq")
 surface_material_override/0 = SubResource("StandardMaterial3D_pfpgv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Slope"]
+collision_layer = 16
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Slope/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_rit6o")
 
 [node name="Player" parent="." instance=ExtResource("2_1g73n")]
 
+[node name="ProjectileManager" type="Node" parent="."]
+
 [node name="UILayer" type="CanvasLayer" parent="."]
-visible = false
 follow_viewport_enabled = true
 
 [node name="UI" type="Control" parent="UILayer"]
