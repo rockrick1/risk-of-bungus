@@ -18,10 +18,13 @@ const ANIMATION_BLEND : float = 7.0
 @onready var animator : AnimationTree = $AnimationTree
 @onready var skeleton : Skeleton3D = $Mesh/Armature/Skeleton3D
 @onready var weapon = $Weapon
-@onready var weapon_streaks : GPUParticles3D = $Mesh/Armature/Skeleton3D/NeckBone/WeaponStreaks
+@onready var weapon_streaks : GPUParticles3D = %WeaponStreaks
+@onready var spine_ik : SkeletonIK3D = $Mesh/Armature/Skeleton3D/SpineIK
+@onready var weapon_ray : RayCast3D = $SpringArmPivot/SpringArm3D/Camera3D/RayCast3D
 
 func _ready():
 	weapon.shot_fired.connect(_on_shot_fired)
+	spine_ik.start()
 
 func _physics_process(delta):
 	var move_direction : Vector3 = Vector3.ZERO
@@ -54,10 +57,6 @@ func _physics_process(delta):
 	move_and_slide()
 	animate(delta)
 
-var started = false
-func _process(_delta) -> void:
-	pass
-
 func animate(delta):
 	if is_on_floor():
 		animator.set("parameters/ground_air_transition/transition_request", "grounded")
@@ -72,5 +71,20 @@ func animate(delta):
 	else:
 		animator.set("parameters/ground_air_transition/transition_request", "air")
 
+func check_streak_collision():
+	var weapon_ray_tip : Vector3
+	if weapon_ray.is_colliding() and (weapon_ray.get_collision_point() - weapon_ray.global_transform.origin).length() > 0.2:
+		weapon_ray_tip = weapon_ray.get_collision_point()
+	else:
+		weapon_ray_tip = (weapon_ray.target_position.z * weapon_ray.global_transform.basis.z) + weapon_ray.global_transform.origin
+	
+	print (weapon_ray.get_collision_point())
+	
+	weapon_streaks.look_at(-weapon_ray_tip, Vector3.UP)
+
 func _on_shot_fired():
-	print("shotFired!")
+	check_streak_collision()
+	weapon_streaks.restart()
+	#streaks_animation.play("streak")
+	#weapon_streaks.playback_speed = clamp(1 / 0.15, 5, 10)
+	#weapon_streaks.process_material.gravity.z = -8000 / (1 / 0.15)

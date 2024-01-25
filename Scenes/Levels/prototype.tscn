@@ -91,6 +91,7 @@ shape = SubResource("ConcavePolygonShape3D_rit6o")
 [node name="Player" parent="." instance=ExtResource("2_1g73n")]
 
 [node name="UILayer" type="CanvasLayer" parent="."]
+visible = false
 follow_viewport_enabled = true
 
 [node name="UI" type="Control" parent="UILayer"]
