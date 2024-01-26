@@ -16,6 +16,10 @@ run/main_scene="res://Scenes/Levels/prototype.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameController="*res://Scenes/Game/game_controller.tscn"
+
 [input]
 
 move_left={

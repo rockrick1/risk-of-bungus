@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://cm88bqvvlmd01"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/BaseEnemy.gd" id="1_yv6nc"]
+[ext_resource type="PackedScene" uid="uid://yporn14wo1uw" path="res://Scenes/Characters/character_component.tscn" id="2_0xghq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f3quv"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_fmtj6"]
+lightmap_size_hint = Vector2i(14, 19)
+size = Vector3(1.005, 0.86, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nariy"]
+albedo_color = Color(0.988235, 0.113725, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 2.23
+
+[sub_resource type="BoxMesh" id="BoxMesh_7olyd"]
+size = Vector3(0.16, 0.065, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_51j2d"]
+albedo_color = Color(0, 0, 0, 1)
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 2.23
+
+[node name="BaseEnemy" type="RigidBody3D"]
+collision_layer = 4
+gravity_scale = 0.0
+linear_damp = 4.0
+script = ExtResource("1_yv6nc")
+
+[node name="CharacterComponent" parent="." instance=ExtResource("2_0xghq")]
+max_health = 100
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_f3quv")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("PrismMesh_fmtj6")
+surface_material_override/0 = SubResource("StandardMaterial3D_nariy")
+
+[node name="Eye1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 0.128, -0.03, -0.462)
+mesh = SubResource("BoxMesh_7olyd")
+surface_material_override/0 = SubResource("StandardMaterial3D_51j2d")
+
+[node name="Eye2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, -0.128, -0.03, -0.462)
+mesh = SubResource("BoxMesh_7olyd")
+surface_material_override/0 = SubResource("StandardMaterial3D_51j2d")

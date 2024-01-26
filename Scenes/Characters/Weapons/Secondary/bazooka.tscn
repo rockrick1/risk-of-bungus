@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dus8iddj08o34"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/Weapons/Secondary/Bazooka.gd" id="1_a4pga"]
+
+[node name="Bazooka" type="Node"]
+script = ExtResource("1_a4pga")
+
+[node name="ShotTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

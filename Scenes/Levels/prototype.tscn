@@ -1,11 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://coue2qehpn4fr"]
+[gd_scene load_steps=21 format=3 uid="uid://coue2qehpn4fr"]
 
+[ext_resource type="Script" path="res://Scripts/Game/BaseMap.gd" id="1_b4pdv"]
 [ext_resource type="Texture2D" uid="uid://b8q44ipg8a3cq" path="res://Assets/Textures/Black.png" id="1_hwes2"]
 [ext_resource type="Texture2D" uid="uid://doyodkg1ds7td" path="res://Assets/Textures/Sky.png" id="1_rrvcb"]
 [ext_resource type="PackedScene" uid="uid://cr2ersq7g6q6f" path="res://Scenes/Characters/player.tscn" id="2_1g73n"]
 [ext_resource type="Texture2D" uid="uid://gwt4mrbmdv01" path="res://Assets/Textures/Orange.png" id="2_087ax"]
 [ext_resource type="Texture2D" uid="uid://dkpqh8de7tb3n" path="res://Assets/Textures/Green.png" id="3_qkav0"]
 [ext_resource type="Texture2D" uid="uid://6wofk4ae5yf3" path="res://Assets/Textures/White.png" id="6_dtq1q"]
+[ext_resource type="PackedScene" uid="uid://cm88bqvvlmd01" path="res://Scenes/Characters/base_enemy.tscn" id="7_n45r7"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6c4vd"]
 panorama = ExtResource("1_rrvcb")
@@ -53,6 +55,7 @@ uv1_triplanar = true
 data = PackedVector3Array(-12.5, 2.5, 2.5, 2.5, -2.5, 2.5, -2.5, -2.5, 2.5, -12.5, 2.5, -2.5, -2.5, -2.5, -2.5, 2.5, -2.5, -2.5, -12.5, 2.5, 2.5, -12.5, 2.5, -2.5, 2.5, -2.5, 2.5, -12.5, 2.5, -2.5, 2.5, -2.5, -2.5, 2.5, -2.5, 2.5, -12.5, 2.5, -2.5, -12.5, 2.5, 2.5, -2.5, -2.5, -2.5, -12.5, 2.5, 2.5, -2.5, -2.5, 2.5, -2.5, -2.5, -2.5, -2.5, -2.5, 2.5, 2.5, -2.5, 2.5, -2.5, -2.5, -2.5, 2.5, -2.5, 2.5, 2.5, -2.5, -2.5, -2.5, -2.5, -2.5)
 
 [node name="Prototype" type="Node3D"]
+script = ExtResource("1_b4pdv")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ctwiv")
@@ -95,8 +98,20 @@ collision_mask = 0
 shape = SubResource("ConcavePolygonShape3D_rit6o")
 
 [node name="Player" parent="." instance=ExtResource("2_1g73n")]
+process_priority = 1
 
 [node name="ProjectileManager" type="Node" parent="."]
+
+[node name="EnemyManager" type="Node" parent="."]
+
+[node name="BaseEnemy" parent="EnemyManager" instance=ExtResource("7_n45r7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.26052, 4.9583, -4.04921)
+
+[node name="BaseEnemy2" parent="EnemyManager" instance=ExtResource("7_n45r7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.26052, 1.59079, 0.83145)
+
+[node name="BaseEnemy3" parent="EnemyManager" instance=ExtResource("7_n45r7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1194, 2.85928, 0.83145)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
@@ -124,3 +139,23 @@ mouse_filter = 1
 [node name="Sprite2D" type="Sprite2D" parent="UILayer/UI/Crosshair"]
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("6_dtq1q")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_top = -111.0
+offset_right = 287.0
+offset_bottom = -22.0
+grow_vertical = 0
+
+[node name="HealthBar" type="ProgressBar" parent="UILayer/UI/VBoxContainer"]
+layout_mode = 2
+
+[node name="StaminaBar" type="ProgressBar" parent="UILayer/UI/VBoxContainer"]
+layout_mode = 2
+
+[node name="XpBar" type="ProgressBar" parent="UILayer/UI/VBoxContainer"]
+layout_mode = 2

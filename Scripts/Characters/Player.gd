@@ -1,9 +1,7 @@
 extends CharacterBody3D
 
 const LERP_VALUE : float = 0.25
-
-var snap_vector : Vector3 = Vector3.DOWN
-var speed : float
+const ANIMATION_BLEND : float = 7.0
 
 @export_group("Movement variables")
 @export var walk_speed : float = 2.0
@@ -11,21 +9,30 @@ var speed : float
 @export var jump_strength : float = 15.0
 @export var gravity : float = 50.0
 
-const ANIMATION_BLEND : float = 7.0
-
+@onready var character_component := $CharacterComponent
 @onready var player_mesh : Node3D = $Mesh
 @onready var spring_arm_pivot : Node3D = $SpringArmPivot
 @onready var animator : AnimationTree = $AnimationTree
 @onready var skeleton : Skeleton3D = $Mesh/Armature/Skeleton3D
 @onready var spine_ik : SkeletonIK3D = $Mesh/Armature/Skeleton3D/SpineIK
-@onready var weapon = $Weapon
+
+#TODO get these dynamically
+@onready var primary_weapon : BaseWeapon = $Rifle 
+@onready var secondary_weapon : BaseWeapon = $Bazooka
+
 @onready var weapon_tip : Node3D = $Mesh/Armature/Skeleton3D/NeckBone/WeaponTip
 @onready var weapon_ray : RayCast3D = $SpringArmPivot/SpringArm3D/Camera3D/RayCast3D
 @onready var projectile_manager : Node = get_parent().get_node("ProjectileManager")
 
+var snap_vector : Vector3 = Vector3.DOWN
+var speed : float
+
 func _ready():
-	weapon.shot_fired.connect(_on_shot_fired)
+	character_component.died.connect(_on_died)
+	primary_weapon.shot_fired.connect(_on_primary_shot_fired)
+	secondary_weapon.shot_fired.connect(_on_secondary_shot_fired)
 	spine_ik.start()
+	print(GameController.player)
 
 func _physics_process(delta):
 	var move_direction : Vector3 = Vector3.ZERO
@@ -59,29 +66,37 @@ func _physics_process(delta):
 	animate(delta)
 
 func animate(delta):
-	if is_on_floor():
-		animator.set("parameters/ground_air_transition/transition_request", "grounded")
-		
-		if velocity.length() > 0:
-			if speed == run_speed:
-				animator.set("parameters/iwr_blend/blend_amount", lerp(animator.get("parameters/iwr_blend/blend_amount"), 1.0, delta * ANIMATION_BLEND))
-			else:
-				animator.set("parameters/iwr_blend/blend_amount", lerp(animator.get("parameters/iwr_blend/blend_amount"), 0.0, delta * ANIMATION_BLEND))
-		else:
-			animator.set("parameters/iwr_blend/blend_amount", lerp(animator.get("parameters/iwr_blend/blend_amount"), -1.0, delta * ANIMATION_BLEND))
-	else:
+	if not is_on_floor():
 		animator.set("parameters/ground_air_transition/transition_request", "air")
-
-func _on_shot_fired():
-	var streak_target : Vector3
-	if weapon_ray.is_colliding() and (weapon_ray.get_collision_point() - weapon_ray.global_transform.origin).length() > 0.2:
-		streak_target = weapon_ray.get_collision_point()
-	else:
-		streak_target = (weapon_ray.target_position.z * weapon_ray.global_transform.basis.z) + weapon_ray.global_transform.origin
-		
-	var streak_instance = weapon.streak_scene.instantiate()
-	streak_instance.position = weapon_tip.global_position
-	projectile_manager.add_child(streak_instance)
-	streak_instance.target = streak_target
-	streak_instance.look_at(streak_target)
+		return
 	
+	animator.set("parameters/ground_air_transition/transition_request", "grounded")
+	
+	if velocity.length() > 0:
+		if speed == run_speed:
+			animator.set("parameters/iwr_blend/blend_amount", lerp(animator.get("parameters/iwr_blend/blend_amount"), 1.0, delta * ANIMATION_BLEND))
+		else:
+			animator.set("parameters/iwr_blend/blend_amount", lerp(animator.get("parameters/iwr_blend/blend_amount"), 0.0, delta * ANIMATION_BLEND))
+	else:
+		animator.set("parameters/iwr_blend/blend_amount", lerp(animator.get("parameters/iwr_blend/blend_amount"), -1.0, delta * ANIMATION_BLEND))
+
+func _on_primary_shot_fired():
+	var target : Vector3
+	if weapon_ray.is_colliding() and (weapon_ray.get_collision_point() - weapon_ray.global_transform.origin).length() > 0.2:
+		target = weapon_ray.get_collision_point()
+	else:
+		target = (weapon_ray.target_position.z * weapon_ray.global_transform.basis.z) + weapon_ray.global_transform.origin
+		
+	primary_weapon.shoot(weapon_tip.global_position, target)
+
+func _on_secondary_shot_fired():
+	var target : Vector3
+	if weapon_ray.is_colliding() and (weapon_ray.get_collision_point() - weapon_ray.global_transform.origin).length() > 0.2:
+		target = weapon_ray.get_collision_point()
+	else:
+		target = (weapon_ray.target_position.z * weapon_ray.global_transform.basis.z) + weapon_ray.global_transform.origin
+		
+	secondary_weapon.shoot(weapon_tip.global_position, target)
+
+func _on_died():
+	print("YOU DIED!!!")

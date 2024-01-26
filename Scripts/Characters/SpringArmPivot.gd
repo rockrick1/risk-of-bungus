@@ -1,11 +1,13 @@
 extends Node3D
 
+const CAMERA_BLEND : float = 0.05
+const X_CLAMP_UP : float = PI/2.2
+const X_CLAMP_DOWN : float = PI/2.5
+
 @export_group("FOV")
 @export var change_fov_on_run : bool
 @export var normal_fov : float = 75.0
 @export var run_fov : float = 90.0
-
-const CAMERA_BLEND : float = 0.05
 
 @onready var spring_arm : SpringArm3D = $SpringArm3D
 @onready var camera : Camera3D = $SpringArm3D/Camera3D
@@ -17,7 +19,7 @@ func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * 0.005)
 		spring_arm.rotate_x(-event.relative.y * 0.005)
-		spring_arm.rotation.x = clamp(spring_arm.rotation.x, -PI/4, PI/4)
+		spring_arm.rotation.x = clamp(spring_arm.rotation.x, -X_CLAMP_DOWN, X_CLAMP_UP)
 
 func _physics_process(_delta):
 	if change_fov_on_run:
