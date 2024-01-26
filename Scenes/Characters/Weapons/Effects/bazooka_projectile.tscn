@@ -14,12 +14,13 @@ left_to_right = 1.0
 size = Vector3(0.355, 0.63, 0.02)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_s2a80"]
-radius = 3.60057
+radius = 6.37328
 
 [node name="BazookaProjectile" type="Area3D"]
 collision_layer = 2
 collision_mask = 20
 script = ExtResource("1_1omii")
+speed = 60.0
 push_force = 1200
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

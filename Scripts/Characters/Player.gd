@@ -40,14 +40,17 @@ func _physics_process(delta):
 	move_direction.z = Input.get_action_strength("move_backwards") - Input.get_action_strength("move_forwards")
 	move_direction = move_direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y)
 	
-	velocity.y -= gravity * delta
+	if is_on_wall_only() and Input.is_action_pressed("jump"):
+		velocity.y = 0
+	else:
+		velocity.y -= gravity * delta
 	
 	if Input.is_action_pressed("run"):
 		speed = run_speed
 	else:
 		speed = walk_speed
 	
-	velocity.x = move_direction.x * speed
+	velocity.x = move_direction.x * speed 
 	velocity.z = move_direction.z * speed
 	
 	if move_direction:
