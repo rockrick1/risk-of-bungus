@@ -4,14 +4,14 @@ extends Node
 signal died
 
 @export var base_health := 15
-@export var base_speed := 15
-@export var base_damage := 15
-@export var base_passive_healing := 15
+@export var base_speed := 15.0
+@export var base_damage := 15.0
+@export var base_passive_healing := 15.0
 
 @onready var character : PhysicsBody3D = get_parent()
 @onready var current_health := base_health
 
-var _max_health_buff : float
+var _max_health_buff : int
 var _speed_buff : float
 var _damage_buff : float
 var _passive_healing_buff : float
@@ -36,7 +36,7 @@ var attack_speed_buff : float:
 		return _attack_speed_buff
 
 func reset_stats():
-	_max_health_buff = 0.0
+	_max_health_buff = 0
 	_speed_buff = 1.0
 	_damage_buff = 1.0
 	_passive_healing_buff = 1.0
@@ -53,7 +53,7 @@ func add_buff(type: BuffInfo.Type, amount: float):
 		BuffInfo.Type.ATTACK_SPEED:
 			_attack_speed_buff *= amount
 		BuffInfo.Type.MAX_HEALTH:
-			_max_health_buff += amount
+			_max_health_buff += int(amount)
 		BuffInfo.Type.SPEED:
 			_speed_buff *= amount
 		BuffInfo.Type.DAMAGE:

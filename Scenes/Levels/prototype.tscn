@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://coue2qehpn4fr"]
+[gd_scene load_steps=22 format=3 uid="uid://coue2qehpn4fr"]
 
 [ext_resource type="Script" path="res://Scripts/Game/BaseMap.gd" id="1_b4pdv"]
 [ext_resource type="Texture2D" uid="uid://b8q44ipg8a3cq" path="res://Assets/Textures/Black.png" id="1_hwes2"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dkpqh8de7tb3n" path="res://Assets/Textures/Green.png" id="3_qkav0"]
 [ext_resource type="Texture2D" uid="uid://6wofk4ae5yf3" path="res://Assets/Textures/White.png" id="6_dtq1q"]
 [ext_resource type="PackedScene" uid="uid://cm88bqvvlmd01" path="res://Scenes/Characters/base_enemy.tscn" id="7_n45r7"]
+[ext_resource type="Script" path="res://Scripts/Items/ItemManager.gd" id="8_tk2d5"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_6c4vd"]
 panorama = ExtResource("1_rrvcb")
@@ -112,6 +113,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.26052, 1.59079, 0.83145)
 
 [node name="BaseEnemy3" parent="EnemyManager" instance=ExtResource("7_n45r7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1194, 2.85928, 0.83145)
+
+[node name="ItemManager" type="Node" parent="."]
+script = ExtResource("8_tk2d5")
+
+[node name="SpawnPoint1" type="Node3D" parent="ItemManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.53697, 1.809, -0.0875049)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true

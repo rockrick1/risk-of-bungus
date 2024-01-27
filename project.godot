@@ -75,3 +75,4 @@ special={
 3d_physics/layer_3="Enemy"
 3d_physics/layer_4="EnemyShot"
 3d_physics/layer_5="Environment"
+3d_physics/layer_6="Item"

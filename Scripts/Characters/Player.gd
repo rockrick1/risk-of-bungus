@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody3D
 
 const LERP_VALUE : float = 0.25
