@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfnarqjqrei3s"]
+
+[ext_resource type="PackedScene" uid="uid://cw2yf1fwi6e8y" path="res://Scenes/Items/base_item.tscn" id="1_eyujg"]
+[ext_resource type="Script" path="res://Scripts/Items/BuffResource.gd" id="2_ullqd"]
+[ext_resource type="Script" path="res://Scripts/Items/ItemResource.gd" id="3_25c8x"]
+
+[sub_resource type="Resource" id="Resource_f25um"]
+script = ExtResource("2_ullqd")
+type = 2
+amount = 10.0
+
+[sub_resource type="Resource" id="Resource_bbifw"]
+script = ExtResource("3_25c8x")
+name = "Donut"
+rarity = 0
+buffs = Array[ExtResource("2_ullqd")]([SubResource("Resource_f25um")])
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3a6ei"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.4
+radial_segments = 20
+
+[node name="EnergyDrink" instance=ExtResource("1_eyujg")]
+resource = SubResource("Resource_bbifw")
+
+[node name="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1.2, 0)
+mesh = SubResource("CylinderMesh_3a6ei")

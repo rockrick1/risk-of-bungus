@@ -6,7 +6,7 @@ var all_items := {}
 
 func _ready():
 	load_all_items()
-	spawn_random_item()
+	spawn_random_item($SpawnPoint1.position)
 
 func load_all_items():
 	for file_name in DirAccess.get_files_at(item_scenes_path):
@@ -17,9 +17,12 @@ func load_all_items():
 		temp_instance.queue_free()
 	return
 
-func spawn_random_item():
+func spawn_random_item(position: Vector3):
 	var size = all_items.size()
 	var random_key = all_items.keys()[randi() % size]
-	var instance = all_items[random_key].instantiate()
+	spawn_item(random_key, position)
+
+func spawn_item(item_name: String, position: Vector3):
+	var instance = all_items[item_name].instantiate()
 	add_child(instance)
-	instance.position = $SpawnPoint1.position
+	instance.position = position

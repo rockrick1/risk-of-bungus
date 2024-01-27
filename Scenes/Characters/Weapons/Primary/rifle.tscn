@@ -6,7 +6,7 @@
 script = ExtResource("1_gudpe")
 
 [node name="ShotTimer" type="Timer" parent="."]
-wait_time = 0.15
+wait_time = 0.4
 one_shot = true
 
 [connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

@@ -6,5 +6,5 @@ func _on_body_entered(_body):
 			continue
 		
 		var vector2body = body.global_position - $ExplosionArea.global_position
-		body.character_component.take_damage(damage, vector2body.normalized() * push_force)
+		body.character_component.take_damage(_damage, vector2body.normalized() * push_force)
 	queue_free()

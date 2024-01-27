@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxb6etinswmrf"]
+
+[ext_resource type="Script" path="res://Scripts/Effects/DamageIndicator.gd" id="1_axuca"]
+
+[node name="DamageIndicator" type="Label3D"]
+billboard = 1
+modulate = Color(0.933333, 0, 0.0823529, 1)
+outline_modulate = Color(0.290196, 0.0509804, 0, 1)
+text = "120"
+font_size = 48
+script = ExtResource("1_axuca")

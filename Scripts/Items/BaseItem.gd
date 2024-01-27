@@ -18,5 +18,5 @@ func _ready():
 func _on_pickup_zone_body_entered(body):
 	if not body is Player:
 		return
-	body.character_component.add_item(resource)
+	body.cc.add_item(resource)
 	queue_free()
