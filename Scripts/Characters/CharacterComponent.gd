@@ -1,11 +1,70 @@
+class_name CharacterComponent
 extends Node
 
 signal died
 
-@export var max_health := 15
+@export var base_health := 15
+@export var base_speed := 15
+@export var base_damage := 15
+@export var base_passive_healing := 15
 
 @onready var character : PhysicsBody3D = get_parent()
-@onready var current_health := max_health
+@onready var current_health := base_health
+
+var _max_health_buff : float
+var _speed_buff : float
+var _damage_buff : float
+var _passive_healing_buff : float
+var _attack_speed_buff : float
+
+var items : Array[ItemResource]
+
+var max_health : int:
+	get:
+		return base_health * _max_health_buff
+var speed : float:
+	get:
+		return base_speed * _speed_buff
+var damage : float:
+	get:
+		return base_damage * _damage_buff
+var passive_healing : float:
+	get:
+		return base_passive_healing * _passive_healing_buff
+var attack_speed_buff : float:
+	get:
+		return _attack_speed_buff
+
+func reset_stats():
+	_max_health_buff = 0.0
+	_speed_buff = 1.0
+	_damage_buff = 1.0
+	_passive_healing_buff = 1.0
+	_attack_speed_buff = 1.0
+
+func recalculate_stats():
+	reset_stats()
+	for item in items:
+		for buff in item.buffs:
+			add_buff(buff.type, buff.amount)
+
+func add_buff(type: BuffInfo.Type, amount: float):
+	match type:
+		BuffInfo.Type.ATTACK_SPEED:
+			_attack_speed_buff *= amount
+		BuffInfo.Type.MAX_HEALTH:
+			_max_health_buff += amount
+		BuffInfo.Type.SPEED:
+			_speed_buff *= amount
+		BuffInfo.Type.DAMAGE:
+			_damage_buff *= amount
+		BuffInfo.Type.PASSIVE_HEALING:
+			_passive_healing_buff *= amount
+
+func add_item(item: ItemResource):
+	items.append(item)
+	for buff in item.buffs:
+		add_buff(buff.type, buff.amount)
 
 func take_damage(amount: int, push_force: Vector3 = Vector3.ZERO):
 	current_health -= amount

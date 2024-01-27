@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=2 format=3 uid="uid://df4x3rfv5swhq"]
+
+[ext_resource type="Script" path="res://Scripts/Items/ItemResource.gd" id="1_ajs1l"]
+
+[resource]
+script = ExtResource("1_ajs1l")
+rarity = 0
+buffs = Array[Resource("res://Scripts/Items/BuffResource.gd")]([])

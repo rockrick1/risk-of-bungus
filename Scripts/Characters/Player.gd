@@ -17,7 +17,7 @@ const ANIMATION_BLEND : float = 7.0
 @onready var spine_ik : SkeletonIK3D = $Mesh/Armature/Skeleton3D/SpineIK
 
 #TODO get these dynamically
-@onready var primary_weapon : BaseWeapon = $Rifle 
+@onready var primary_weapon : BaseWeapon = $Rifle
 @onready var secondary_weapon : BaseWeapon = $Bazooka
 
 @onready var weapon_tip : Node3D = $Mesh/Armature/Skeleton3D/NeckBone/WeaponTip
@@ -50,7 +50,7 @@ func _physics_process(delta):
 	else:
 		speed = walk_speed
 	
-	velocity.x = move_direction.x * speed 
+	velocity.x = move_direction.x * speed
 	velocity.z = move_direction.z * speed
 	
 	if move_direction:
@@ -83,23 +83,19 @@ func animate(delta):
 	else:
 		animator.set("parameters/iwr_blend/blend_amount", lerp(animator.get("parameters/iwr_blend/blend_amount"), -1.0, delta * ANIMATION_BLEND))
 
-func _on_primary_shot_fired():
+func get_weapon_target_vector() -> Vector3:
 	var target : Vector3
 	if weapon_ray.is_colliding() and (weapon_ray.get_collision_point() - weapon_ray.global_transform.origin).length() > 0.2:
 		target = weapon_ray.get_collision_point()
 	else:
 		target = (weapon_ray.target_position.z * weapon_ray.global_transform.basis.z) + weapon_ray.global_transform.origin
-		
-	primary_weapon.shoot(weapon_tip.global_position, target)
+	return target
+
+func _on_primary_shot_fired():
+	primary_weapon.shoot(weapon_tip.global_position, get_weapon_target_vector())
 
 func _on_secondary_shot_fired():
-	var target : Vector3
-	if weapon_ray.is_colliding() and (weapon_ray.get_collision_point() - weapon_ray.global_transform.origin).length() > 0.2:
-		target = weapon_ray.get_collision_point()
-	else:
-		target = (weapon_ray.target_position.z * weapon_ray.global_transform.basis.z) + weapon_ray.global_transform.origin
-		
-	secondary_weapon.shoot(weapon_tip.global_position, target)
+	secondary_weapon.shoot(weapon_tip.global_position, get_weapon_target_vector())
 
 func _on_died():
 	print("YOU DIED!!!")
