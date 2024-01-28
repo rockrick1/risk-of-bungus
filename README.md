@@ -17,6 +17,9 @@ The character's legs will dictate the type of movement. Run, Slide, Fly, etc.
 
 The movement is inspired by games like Mario Odyssey, Titanfall and Doom Eternal.
 
+## Planning
+Project planning can be found [here](https://app.milanote.com/1PQESL13PIaDc7?p=Y3OBZKv4M5r).
+
 ## Original third person template from WaffleAWT
 
 You have exported variables both on the player and the SpringArmPivot nodes
