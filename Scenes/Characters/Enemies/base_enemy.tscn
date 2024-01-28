@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsetv8424oo3g"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/Enemies/BaseEnemy.gd" id="1_yv6nc"]
+[ext_resource type="PackedScene" uid="uid://yporn14wo1uw" path="res://Scenes/Characters/character_component.tscn" id="2_0xghq"]
+
+[node name="BaseEnemy" type="RigidBody3D"]
+collision_layer = 4
+gravity_scale = 0.0
+linear_damp = 4.0
+script = ExtResource("1_yv6nc")
+
+[node name="CharacterComponent" parent="." instance=ExtResource("2_0xghq")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]

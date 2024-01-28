@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://w6nnax4sheho"]
+
+[ext_resource type="Script" path="res://Weapons/Primary/Rifle.gd" id="1_gudpe"]
+
+[node name="Rifle" type="Node"]
+script = ExtResource("1_gudpe")
+
+[node name="ShotTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

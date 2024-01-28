@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://n7stbq4mofqv"]
+
+[ext_resource type="PackedScene" uid="uid://bsetv8424oo3g" path="res://Scenes/Characters/Enemies/base_enemy.tscn" id="1_7u4li"]
+[ext_resource type="Script" path="res://Scripts/Characters/Enemies/Wisp.gd" id="2_u4hfv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_obi8o"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_7w203"]
+lightmap_size_hint = Vector2i(14, 19)
+size = Vector3(1.005, 0.86, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fxi4a"]
+albedo_color = Color(0.988235, 0.113725, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 2.23
+
+[sub_resource type="BoxMesh" id="BoxMesh_lkuco"]
+size = Vector3(0.16, 0.065, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4sdqb"]
+albedo_color = Color(0, 0, 0, 1)
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 2.23
+
+[node name="Wisp" instance=ExtResource("1_7u4li")]
+script = ExtResource("2_u4hfv")
+
+[node name="CharacterComponent" parent="." index="0"]
+base_health = 100
+base_speed = 0.5
+base_run_speed = 0.0
+base_jump_strength = 0.0
+base_passive_healing = 1.0
+
+[node name="CollisionShape3D" parent="." index="1"]
+shape = SubResource("BoxShape3D_obi8o")
+
+[node name="Body" type="MeshInstance3D" parent="." index="2"]
+mesh = SubResource("PrismMesh_7w203")
+surface_material_override/0 = SubResource("StandardMaterial3D_fxi4a")
+
+[node name="Eye1" type="MeshInstance3D" parent="." index="3"]
+transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 0.128, -0.03, -0.462)
+mesh = SubResource("BoxMesh_lkuco")
+surface_material_override/0 = SubResource("StandardMaterial3D_4sdqb")
+
+[node name="Eye2" type="MeshInstance3D" parent="." index="4"]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, -0.128, -0.03, -0.462)
+mesh = SubResource("BoxMesh_lkuco")
+surface_material_override/0 = SubResource("StandardMaterial3D_4sdqb")

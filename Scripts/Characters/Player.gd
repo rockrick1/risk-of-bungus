@@ -6,7 +6,7 @@ const ANIMATION_BLEND : float = 7.0
 
 @export var gravity : float = 50.0
 
-@onready var cc := $CharacterComponent
+@onready var character_component := $CharacterComponent
 @onready var player_mesh : Node3D = $Mesh
 @onready var spring_arm_pivot : Node3D = $SpringArmPivot
 @onready var animator : AnimationTree = $AnimationTree
@@ -21,6 +21,9 @@ const ANIMATION_BLEND : float = 7.0
 @onready var weapon_ray : RayCast3D = $SpringArmPivot/SpringArm3D/Camera3D/RayCast3D
 @onready var projectile_manager : Node = get_parent().get_node("ProjectileManager")
 
+var cc : CharacterComponent:
+	get:
+		return character_component
 var snap_vector : Vector3 = Vector3.DOWN
 var h_speed : float
 

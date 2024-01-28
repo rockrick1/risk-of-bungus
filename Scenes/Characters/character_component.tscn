@@ -4,3 +4,13 @@
 
 [node name="CharacterComponent" type="Node"]
 script = ExtResource("1_wp61h")
+
+[node name="HealCooldown" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="HealTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="HealCooldown" to="." method="_on_heal_cooldown_timeout"]
+[connection signal="timeout" from="HealTimer" to="." method="_on_heal_timer_timeout"]

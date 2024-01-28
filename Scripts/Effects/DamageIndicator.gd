@@ -1,13 +1,18 @@
-extends Label3D
+extends RigidBody3D
 
-const float_speed := .5
+const life_time := .7
+
+@onready var force := Vector3(randf() - .5, 2, randf() - .5) * 100
 
 func _ready():
-	var timer := get_tree().create_timer(2)
+	apply_force(force)
+	var timer := get_tree().create_timer(life_time)
 	timer.timeout.connect(queue_free)
 
 func set_damage(amount: int):
-	text = str(amount)
+	$Damage.text = str(amount)
+	$Heal.visible = false
 
-func _physics_process(delta):
-	position += Vector3.UP * delta * float_speed
+func set_heal(amount: int):
+	$Heal.text = str(amount)
+	$Damage.visible = false
