@@ -31,52 +31,6 @@ func _ready():
 	secondary_weapon.shot_fired.connect(_on_secondary_shot_fired)
 	spine_ik.start()
 
-#func _physics_process(delta):
-	#var move_direction : Vector3 = Vector3.ZERO
-	#move_direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	#move_direction.z = Input.get_action_strength("move_backwards") - Input.get_action_strength("move_forwards")
-	#move_direction = move_direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y)
-#
-	#velocity.y -= gravity * delta
-	#
-	#if Input.is_action_pressed("run"):
-		#h_speed = cc.run_speed
-	#else:
-		#h_speed = cc.walk_speed
-	#
-	#velocity.x = move_direction.x * h_speed
-	#velocity.z = move_direction.z * h_speed
-	#
-	#if move_direction:
-		#player_mesh.rotation.y = lerp_angle(player_mesh.rotation.y, atan2(velocity.x, velocity.z), LERP_VALUE)
-	#
-	#var just_landed := is_on_floor() and snap_vector == Vector3.ZERO
-	#var is_jumping := is_on_floor() and Input.is_action_just_pressed("jump")
-	#if is_jumping:
-		#velocity.y = cc.base_jump_strength 
-		#snap_vector = Vector3.ZERO
-	#elif just_landed:
-		#snap_vector = Vector3.DOWN
-	#
-	#apply_floor_snap()
-	#move_and_slide()
-	#animate(delta)
-#
-#func animate(delta):
-	#if not is_on_floor():
-		#animator.set("parameters/ground_air_transition/transition_request", "air")
-		#return
-	#
-	#animator.set("parameters/ground_air_transition/transition_request", "grounded")
-	#
-	#if velocity.length() > 0:
-		#if h_speed == cc.run_speed:
-			#animator.set("parameters/iwr_blend/blend_amount", lerp(animator.get("parameters/iwr_blend/blend_amount"), 1.0, delta * ANIMATION_BLEND))
-		#else:
-			#animator.set("parameters/iwr_blend/blend_amount", lerp(animator.get("parameters/iwr_blend/blend_amount"), 0.0, delta * ANIMATION_BLEND))
-	#else:
-		#animator.set("parameters/iwr_blend/blend_amount", lerp(animator.get("parameters/iwr_blend/blend_amount"), -1.0, delta * ANIMATION_BLEND))
-
 func get_weapon_target_vector() -> Vector3:
 	var target : Vector3
 	if weapon_ray.is_colliding() and (weapon_ray.get_collision_point() - weapon_ray.global_transform.origin).length() > 0.2:
