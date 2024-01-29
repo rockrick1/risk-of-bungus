@@ -1,6 +1,7 @@
 extends PlayerMovementState
 
 func enter():
+	player.velocity = Vector3.ZERO
 	animator.set("parameters/ground_air_transition/transition_request", "grounded")
 
 func physics_process(delta):

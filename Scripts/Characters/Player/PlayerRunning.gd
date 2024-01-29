@@ -16,7 +16,7 @@ func physics_process(delta):
 	var move_direction := Vector3.ZERO
 	move_direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	move_direction.z = Input.get_action_strength("move_backwards") - Input.get_action_strength("move_forwards")
-	move_direction = move_direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y)
+	move_direction = move_direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y).normalized()
 	
 	player.velocity.y -= player.gravity * delta
 
