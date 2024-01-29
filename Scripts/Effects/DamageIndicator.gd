@@ -1,12 +1,12 @@
 extends RigidBody3D
 
-const life_time := .7
+const LIFE_TIME := .7
 
 @onready var force := Vector3(randf() - .5, 2, randf() - .5) * 100
 
 func _ready():
 	apply_force(force)
-	var timer := get_tree().create_timer(life_time)
+	var timer := get_tree().create_timer(LIFE_TIME)
 	timer.timeout.connect(queue_free)
 
 func set_damage(amount: int):

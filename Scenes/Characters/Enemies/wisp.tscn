@@ -37,15 +37,16 @@ base_passive_healing = 1.0
 shape = SubResource("BoxShape3D_obi8o")
 
 [node name="Body" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("PrismMesh_7w203")
 surface_material_override/0 = SubResource("StandardMaterial3D_fxi4a")
 
 [node name="Eye1" type="MeshInstance3D" parent="." index="3"]
-transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 0.128, -0.03, -0.462)
+transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 0.128, 0.174933, -0.462)
 mesh = SubResource("BoxMesh_lkuco")
 surface_material_override/0 = SubResource("StandardMaterial3D_4sdqb")
 
 [node name="Eye2" type="MeshInstance3D" parent="." index="4"]
-transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, -0.128, -0.03, -0.462)
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, -0.128, 0.174933, -0.462)
 mesh = SubResource("BoxMesh_lkuco")
 surface_material_override/0 = SubResource("StandardMaterial3D_4sdqb")
