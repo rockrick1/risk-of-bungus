@@ -4,7 +4,7 @@ extends CharacterBody3D
 const LERP_VALUE : float = 0.25
 const ANIMATION_BLEND : float = 7
 
-@export var gravity : float = 50.0
+@export var gravity : float = 20.0
 
 @onready var character_component := $CharacterComponent
 @onready var player_mesh : Node3D = $Mesh
