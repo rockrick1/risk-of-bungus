@@ -141,7 +141,34 @@ script = ExtResource("8_tk2d5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.53697, 1.28645, 4.037)
 
 [node name="Donut" parent="ItemManager" instance=ExtResource("9_u66k0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.01705, 0.559759, 1.40662)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4809, 0.559759, 0.621166)
+
+[node name="Donut2" parent="ItemManager" instance=ExtResource("9_u66k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.41612, 0.559759, 2.55106)
+
+[node name="Donut3" parent="ItemManager" instance=ExtResource("9_u66k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.41783, 0.559759, 4.31451)
+
+[node name="Donut4" parent="ItemManager" instance=ExtResource("9_u66k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.35621, 0.559759, 5.47479)
+
+[node name="Donut5" parent="ItemManager" instance=ExtResource("9_u66k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.10532, 0.559758, 6.82634)
+
+[node name="Donut6" parent="ItemManager" instance=ExtResource("9_u66k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.07679, 0.559759, 0.797441)
+
+[node name="Donut7" parent="ItemManager" instance=ExtResource("9_u66k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.01201, 0.559759, 2.72734)
+
+[node name="Donut8" parent="ItemManager" instance=ExtResource("9_u66k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.01372, 0.559759, 4.49078)
+
+[node name="Donut9" parent="ItemManager" instance=ExtResource("9_u66k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.95209, 0.559759, 5.65107)
+
+[node name="Donut10" parent="ItemManager" instance=ExtResource("9_u66k0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.70121, 0.559758, 7.00261)
 
 [node name="Player" parent="." instance=ExtResource("3_cy5gn")]
 

@@ -24,7 +24,7 @@ var _damage_buff : float
 var _passive_healing_buff : float
 var _attack_speed_buff : float
 
-var items : Array[ItemResource]
+var items := {}
 
 var max_health : int:
 	get:
@@ -58,28 +58,34 @@ func reset_stats():
 
 func recalculate_stats():
 	reset_stats()
-	for item in items:
+	for item in items.keys():
 		for buff in item.buffs:
-			add_buff(buff.type, buff.amount)
+			add_buff(buff.type, buff.get_amount(items[item]))
 	apply_new_stats()
 
 func add_buff(type: BuffInfo.Type, amount: float):
 	match type:
 		BuffInfo.Type.ATTACK_SPEED:
-			_attack_speed_buff *= amount
+			_attack_speed_buff += amount
 		BuffInfo.Type.MAX_HEALTH:
 			_max_health_buff += int(amount)
 		BuffInfo.Type.SPEED:
-			_speed_buff *= amount
+			_speed_buff += amount
 		BuffInfo.Type.DAMAGE:
-			_damage_buff *= amount
+			_damage_buff += amount
 		BuffInfo.Type.PASSIVE_HEALING:
-			_passive_healing_buff *= amount
+			_passive_healing_buff += amount
 
 func add_item(item: ItemResource):
-	items.append(item)
+	#TODO this is horrible, rewrite this later
+	if not items.has(item):
+		items[item] = 0
+	else:
+		for buff in item.buffs:
+			add_buff(buff.type, -buff.get_amount(items[item]))
+	items[item] += 1
 	for buff in item.buffs:
-		add_buff(buff.type, buff.amount)
+		add_buff(buff.type, buff.get_amount(items[item]))
 	apply_new_stats()
 
 func apply_new_stats():

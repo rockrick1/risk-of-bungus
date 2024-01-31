@@ -1,12 +1,13 @@
 extends PlayerMovementState
 
 const FALL_GRAVITY_MULTIPLIER := .3
-const WALL_INWARD_ANGLE_INFLUENCE := .01
+const WALL_INWARD_ANGLE_INFLUENCE := .02
 
 @onready var fall_timer := $FallTimer
 
 var player_direction_on_enter : Vector3
 var wall_normal : Vector3
+var run_released : bool
 
 func enter():
 	animator.set("parameters/ground_air_transition/transition_request", "grounded")
@@ -18,21 +19,25 @@ func enter():
 	player_direction_on_enter = player_direction_on_enter.rotated(Vector3.UP, spring_arm_pivot.rotation.y).normalized()
 	
 	wall_normal = player.get_wall_normal()
+	
+	run_released = false
 
 func exit():
 	fall_timer.stop()
 
 func physics_process(delta):
-	if Input.is_action_just_pressed("jump"):
-		wall_normal.y = 1
-		player.velocity = wall_normal * cc.base_jump_strength
+	var wants_jump := Input.is_action_just_pressed("jump")
+	var is_on_wall := player.is_on_wall_only()
+	if wants_jump or not is_on_wall:
+		if wants_jump:
+			wall_normal.y = 1
+			player.velocity = wall_normal * cc.base_jump_strength
 		transitioned.emit(self, "walljumping")
 		super.physics_process(delta)
 		return
-	if not player.is_on_wall_only():
-		transitioned.emit(self, "idle")
-		super.physics_process(delta)
-		return
+	
+	if not Input.is_action_pressed("run"):
+		run_released = true
 	
 	var angle_to_wall := xz_angle(player_direction_on_enter, wall_normal)
 	var angle_to_rotate := (.5 * PI) + WALL_INWARD_ANGLE_INFLUENCE
@@ -40,7 +45,7 @@ func physics_process(delta):
 		angle_to_rotate = -angle_to_rotate
 	var move_direction := wall_normal.rotated(Vector3.UP, angle_to_rotate).normalized()
 	
-	if fall_timer.is_stopped():
+	if fall_timer.is_stopped() or run_released:
 		player.velocity.y -= player.gravity * delta * FALL_GRAVITY_MULTIPLIER
 	else:
 		player.velocity.y = 0
