@@ -143,6 +143,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.53697, 1.28645, 4.037)
 [node name="Donut" parent="ItemManager" instance=ExtResource("9_u66k0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.01705, 0.559759, 1.40662)
 
+[node name="Player" parent="." instance=ExtResource("3_cy5gn")]
+
 [node name="UILayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
@@ -193,5 +195,3 @@ layout_mode = 2
 [node name="PlayerMovementState" type="Label" parent="UILayer"]
 offset_right = 40.0
 offset_bottom = 23.0
-
-[node name="Player_Robot" parent="." instance=ExtResource("3_cy5gn")]
