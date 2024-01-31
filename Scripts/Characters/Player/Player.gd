@@ -9,7 +9,7 @@ const ANIMATION_BLEND : float = 7
 @onready var character_component := $CharacterComponent
 @onready var player_mesh : Node3D = $Skeleton_Player_Robot
 @onready var skeleton : Skeleton3D = $Mesh/Armature/Skeleton3D
-@onready var spine_ik : SkeletonIK3D = $Mesh/Armature/Skeleton3D/SpineIK
+@onready var spine_ik : SkeletonIK3D = $Skeleton_Player_Robot/Armature_011/Skeleton3D/SpineIK
 
 #TODO get these dynamically
 @onready var primary_weapon : BaseWeapon = $Rifle

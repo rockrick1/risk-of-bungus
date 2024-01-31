@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b8q44ipg8a3cq" path="res://Assets/Textures/Black.png" id="1_hwes2"]
 [ext_resource type="Texture2D" uid="uid://doyodkg1ds7td" path="res://Assets/Textures/Sky.png" id="1_rrvcb"]
 [ext_resource type="Texture2D" uid="uid://gwt4mrbmdv01" path="res://Assets/Textures/Orange.png" id="2_087ax"]
-[ext_resource type="PackedScene" uid="uid://b2ewfv1grd86i" path="res://Scenes/Characters/player_Robot.tscn" id="3_cy5gn"]
+[ext_resource type="PackedScene" uid="uid://c6kvg8ol0o2em" path="res://Scenes/Characters/player_Robot.tscn" id="3_cy5gn"]
 [ext_resource type="Texture2D" uid="uid://dkpqh8de7tb3n" path="res://Assets/Textures/Green.png" id="3_qkav0"]
 [ext_resource type="Texture2D" uid="uid://6wofk4ae5yf3" path="res://Assets/Textures/White.png" id="6_dtq1q"]
 [ext_resource type="Script" path="res://Scripts/Items/ItemManager.gd" id="8_tk2d5"]
