@@ -1,7 +1,5 @@
 extends PlayerMovementState
 
-const AIR_CONTROL := 5
-
 func enter():
 	animator.set("parameters/ground_air_transition/transition_request", "air")
 	player.snap_vector = Vector3.ZERO
@@ -19,10 +17,8 @@ func physics_process(delta):
 		h_speed = cc.run_speed
 	else:
 		h_speed = cc.walk_speed
-	player.velocity.x += move_direction.x * h_speed * delta * AIR_CONTROL
-	player.velocity.z += move_direction.z * h_speed * delta * AIR_CONTROL
-	player.velocity.x = clamp(-h_speed, player.velocity.x, h_speed)
-	player.velocity.z = clamp(-h_speed, player.velocity.z, h_speed)
+	player.velocity.x = move_direction.x * h_speed
+	player.velocity.z = move_direction.z * h_speed
 	
 	if move_direction:
 		player.player_mesh.rotation.y = lerp_angle(player.player_mesh.rotation.y, atan2(player.velocity.x, player.velocity.z), player.LERP_VALUE)

@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://gwt4mrbmdv01" path="res://Assets/Textures/Orange.png" id="2_087ax"]
 [ext_resource type="Texture2D" uid="uid://dkpqh8de7tb3n" path="res://Assets/Textures/Green.png" id="3_qkav0"]
 [ext_resource type="Texture2D" uid="uid://6wofk4ae5yf3" path="res://Assets/Textures/White.png" id="6_dtq1q"]
-[ext_resource type="PackedScene" uid="uid://n7stbq4mofqv" path="res://Scenes/Characters/Enemies/wisp.tscn" id="7_n45r7"]
 [ext_resource type="Script" path="res://Scripts/Items/ItemManager.gd" id="8_tk2d5"]
 [ext_resource type="PackedScene" uid="uid://c4dtys8lsdj3o" path="res://Scenes/Items/donut.tscn" id="9_u66k0"]
 
@@ -29,7 +28,7 @@ uv1_triplanar = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_mmup0"]
 material = SubResource("StandardMaterial3D_ajchh")
-size = Vector2(50, 50)
+size = Vector2(500, 500)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_26ptr"]
 data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
@@ -45,7 +44,11 @@ size = Vector3(10, 3, 1)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_v7prx"]
 data = PackedVector3Array(-5, 1.5, 0.5, 5, 1.5, 0.5, -5, -1.5, 0.5, 5, 1.5, 0.5, 5, -1.5, 0.5, -5, -1.5, 0.5, 5, 1.5, -0.5, -5, 1.5, -0.5, 5, -1.5, -0.5, -5, 1.5, -0.5, -5, -1.5, -0.5, 5, -1.5, -0.5, 5, 1.5, 0.5, 5, 1.5, -0.5, 5, -1.5, 0.5, 5, 1.5, -0.5, 5, -1.5, -0.5, 5, -1.5, 0.5, -5, 1.5, -0.5, -5, 1.5, 0.5, -5, -1.5, -0.5, -5, 1.5, 0.5, -5, -1.5, 0.5, -5, -1.5, -0.5, 5, 1.5, 0.5, -5, 1.5, 0.5, 5, 1.5, -0.5, -5, 1.5, 0.5, -5, 1.5, -0.5, 5, 1.5, -0.5, -5, -1.5, 0.5, 5, -1.5, 0.5, -5, -1.5, -0.5, 5, -1.5, 0.5, 5, -1.5, -0.5, -5, -1.5, -0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hpjfk"]
+albedo_texture = ExtResource("1_hwes2")
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_aerli"]
+material = SubResource("StandardMaterial3D_hpjfk")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_e5ssi"]
 
@@ -78,32 +81,44 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_26ptr")
 
-[node name="Wall2" type="MeshInstance3D" parent="."]
+[node name="BigWall" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.27266, 0, 5.29551, 0, 2.77976, 0, -1.05358, 0, 11.4228, -6.66462, 3.03167, -9.66217)
 mesh = SubResource("BoxMesh_plpqy")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Wall2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="BigWall"]
 collision_layer = 16
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BigWall/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_v7prx")
 
-[node name="Wall3" type="MeshInstance3D" parent="."]
-transform = Transform3D(10.1058, 0, 0, 0, 4.44746, 0, 0, 0, 10.1058, 14.5083, 3.03167, -10.5224)
-mesh = SubResource("CylinderMesh_aerli")
+[node name="BigWall2" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.27266, 0, 5.29551, 0, 2.77976, 0, -1.05358, 0, 11.4228, -12.2709, 6.30174, -27.1164)
+mesh = SubResource("BoxMesh_plpqy")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Wall3"]
+[node name="StaticBody3D" type="StaticBody3D" parent="BigWall2"]
 collision_layer = 16
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BigWall2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_v7prx")
+
+[node name="Cylinder" type="MeshInstance3D" parent="."]
+transform = Transform3D(10.1058, 0, 0, 0, 4.44746, 0, 0, 0, 10.1058, 20.767, 3.03167, -14.7472)
+mesh = SubResource("CylinderMesh_aerli")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder/StaticBody3D"]
 shape = SubResource("CylinderShape3D_e5ssi")
 
 [node name="Slope" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.61096, 1, 11.7306)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13.8065, 1, 17.2413)
 mesh = SubResource("PrismMesh_0l7qq")
 surface_material_override/0 = SubResource("StandardMaterial3D_pfpgv")
 
@@ -120,18 +135,6 @@ process_priority = 1
 [node name="ProjectileManager" type="Node" parent="."]
 
 [node name="EnemyManager" type="Node" parent="."]
-
-[node name="Wisp" parent="EnemyManager" instance=ExtResource("7_n45r7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.77917, 3.62948, 17.8769)
-collision_mask = 1
-
-[node name="Wisp2" parent="EnemyManager" instance=ExtResource("7_n45r7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.77917, 4.31464, 24.0805)
-collision_mask = 1
-
-[node name="Wisp3" parent="EnemyManager" instance=ExtResource("7_n45r7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.50124, 3.62948, 21.6492)
-collision_mask = 1
 
 [node name="ItemManager" type="Node" parent="."]
 script = ExtResource("8_tk2d5")

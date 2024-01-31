@@ -6,7 +6,7 @@ var all_items := {}
 
 func _ready():
 	load_all_items()
-	spawn_random_item($SpawnPoint1.position)
+	#spawn_random_item($SpawnPoint1.position)
 
 func load_all_items():
 	for file_name in DirAccess.get_files_at(item_scenes_path):

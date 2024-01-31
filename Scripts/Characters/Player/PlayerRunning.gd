@@ -27,9 +27,7 @@ func physics_process(delta):
 	if move_direction:
 		player.player_mesh.rotation.y = lerp_angle(player.player_mesh.rotation.y, atan2(player.velocity.x, player.velocity.z), player.LERP_VALUE)
 	
-	if Input.is_action_just_pressed("jump"):
-		transitioned.emit(self, "jumping")
-	elif move_direction == Vector3.ZERO:
+	if move_direction == Vector3.ZERO:
 		transitioned.emit(self, "idle")
 	elif not Input.is_action_pressed("run"):
 		transitioned.emit(self, "walking")
