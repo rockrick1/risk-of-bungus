@@ -10,7 +10,7 @@ var wall_normal : Vector3
 var run_released : bool
 
 func enter():
-	animator.set("parameters/ground_air_transition/transition_request", "grounded")
+	animator.set("parameters/ground_air_transition/transition_request", "wallrunning")
 	fall_timer.start()
 	
 	player_direction_on_enter = Vector3.ZERO

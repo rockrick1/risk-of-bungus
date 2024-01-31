@@ -7,7 +7,8 @@
 [sub_resource type="Resource" id="Resource_f25um"]
 script = ExtResource("2_ullqd")
 type = 2
-amount = 2.0
+_base_amount = 0.0
+_amount_per_extra_stack = 0.0
 
 [sub_resource type="Resource" id="Resource_bbifw"]
 script = ExtResource("3_25c8x")
