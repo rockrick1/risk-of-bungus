@@ -131,6 +131,7 @@ shape = SubResource("ConcavePolygonShape3D_rit6o")
 
 [node name="Player" parent="." instance=ExtResource("2_1g73n")]
 process_priority = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.97842, 0)
 
 [node name="ProjectileManager" type="Node" parent="."]
 
