@@ -4,26 +4,26 @@ extends PlayerMovementState
 @export var end_air_control := 5
 @export var air_control_transition_time := .5
 
-var state_time := .0
+var air_control : float
+var air_control_tween : Tween
 
-func enter():
+func enter(_params: Dictionary):
 	animator.set("parameters/ground_air_transition/transition_request", "air")
 	player.snap_vector = Vector3.ZERO
-	state_time = 0
+	setup_air_control()
+
+func setup_air_control():
+	air_control = start_air_control
+	if air_control_tween:
+		air_control_tween.kill()
+	air_control_tween = create_tween()
+	air_control_tween.tween_property(self, "air_control", end_air_control, air_control_transition_time)
 
 func physics_process(delta):
-	var move_direction := Vector3.ZERO
-	move_direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	move_direction.z = Input.get_action_strength("move_backwards") - Input.get_action_strength("move_forwards")
-	move_direction = move_direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y).normalized()
+	var move_direction = get_movement_direction()
 
 	player.velocity.y -= player.gravity * delta
-	state_time += delta
 	
-	var air_control = lerp(start_air_control, end_air_control, state_time / air_control_transition_time)
-	air_control = clamp(air_control, start_air_control, end_air_control)
-	print(air_control)
-
 	var h_speed := cc.run_speed
 	player.velocity.x += move_direction.x * h_speed * delta * air_control
 	player.velocity.x = clamp(player.velocity.x, -h_speed, h_speed)

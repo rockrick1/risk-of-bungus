@@ -1,14 +1,11 @@
 extends PlayerMovementState
 
-func enter():
+func enter(_params: Dictionary):
 	animator.set("parameters/ground_air_transition/transition_request", "air")
 	player.snap_vector = Vector3.ZERO
 
 func physics_process(delta):
-	var move_direction := Vector3.ZERO
-	move_direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	move_direction.z = Input.get_action_strength("move_backwards") - Input.get_action_strength("move_forwards")
-	move_direction = move_direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y).normalized()
+	var move_direction = get_movement_direction()
 
 	player.velocity.y -= player.gravity * delta
 

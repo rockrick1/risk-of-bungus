@@ -1,12 +1,12 @@
 class_name State
 extends Node
 
-signal transitioned(State, String)
+signal transitioned(State, String, Dictionary)
 
-func enter():
+func enter(_params: Dictionary):
 	pass
 
-func exit():
+func exit(_params: Dictionary):
 	pass
 
 func process(_delta):

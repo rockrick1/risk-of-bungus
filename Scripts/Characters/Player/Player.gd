@@ -10,6 +10,8 @@ const ANIMATION_BLEND : float = 7
 @onready var player_mesh : Node3D = $Mesh
 @onready var skeleton : Skeleton3D = $Mesh/Armature/Skeleton3D
 @onready var spine_ik : SkeletonIK3D = $Mesh/Armature/Skeleton3D/SpineIK
+@onready var animator := $AnimationTree
+@onready var spring_arm_pivot := $SpringArmPivot
 
 #TODO get these dynamically
 @onready var primary_weapon : BaseWeapon = $Rifle
@@ -17,7 +19,6 @@ const ANIMATION_BLEND : float = 7
 
 @onready var weapon_tip : Node3D = $Mesh/Armature/Skeleton3D/NeckBone/WeaponTip
 @onready var weapon_ray : RayCast3D = $SpringArmPivot/SpringArm3D/Camera3D/RayCast3D
-@onready var projectile_manager : Node = get_parent().get_node("ProjectileManager")
 
 var cc : CharacterComponent:
 	get:
@@ -30,6 +31,7 @@ func _ready():
 	primary_weapon.shot_fired.connect(_on_primary_shot_fired)
 	secondary_weapon.shot_fired.connect(_on_secondary_shot_fired)
 	spine_ik.start()
+	$MovementStateMachine.initialize()
 
 func get_weapon_target_vector() -> Vector3:
 	var target : Vector3

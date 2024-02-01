@@ -1,29 +1,35 @@
 extends PlayerMovementState
 
-const FALL_GRAVITY_MULTIPLIER := .3
 const WALL_INWARD_ANGLE_INFLUENCE := .02
+
+@export var fall_gravity_multiplier := .3
+@export var walljump_force_multiplier := 1.0
+@export var break_force := 5.0
 
 @onready var fall_timer := $FallTimer
 
 var player_direction_on_enter : Vector3
 var wall_normal : Vector3
-var run_released : bool
+var move_direction : Vector3
 
-func enter():
+func enter(_params: Dictionary):
 	animator.set("parameters/ground_air_transition/transition_request", "grounded")
 	fall_timer.start()
-	
-	player_direction_on_enter = Vector3.ZERO
-	player_direction_on_enter.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	player_direction_on_enter.z = Input.get_action_strength("move_backwards") - Input.get_action_strength("move_forwards")
-	player_direction_on_enter = player_direction_on_enter.rotated(Vector3.UP, spring_arm_pivot.rotation.y).normalized()
-	
+	setup_directions()
+	player.snap_vector = -wall_normal
+
+func exit(_params: Dictionary):
+	fall_timer.stop()
+
+func setup_directions():
+	player_direction_on_enter = get_movement_direction()
 	wall_normal = player.get_wall_normal()
 	
-	run_released = false
-
-func exit():
-	fall_timer.stop()
+	var angle_to_wall := xz_angle(player_direction_on_enter, wall_normal)
+	var angle_to_rotate := (.5 * PI) + WALL_INWARD_ANGLE_INFLUENCE
+	if angle_to_wall <= 0 or angle_to_wall >= PI:
+		angle_to_rotate = -angle_to_rotate
+	move_direction = wall_normal.rotated(Vector3.UP, angle_to_rotate).normalized()
 
 func physics_process(delta):
 	var wants_jump := Input.is_action_just_pressed("jump")
@@ -31,22 +37,18 @@ func physics_process(delta):
 	if wants_jump or not is_on_wall:
 		if wants_jump:
 			wall_normal.y = 1
-			player.velocity = wall_normal * cc.base_jump_strength
+			player.velocity = wall_normal * cc.base_jump_strength * walljump_force_multiplier
 		transitioned.emit(self, "walljumping")
 		super.physics_process(delta)
 		return
 	
 	if not Input.is_action_pressed("run"):
-		run_released = true
+		transitioned.emit(self, "wallsliding", { "move_direction" : move_direction })
+		super.physics_process(delta)
+		return
 	
-	var angle_to_wall := xz_angle(player_direction_on_enter, wall_normal)
-	var angle_to_rotate := (.5 * PI) + WALL_INWARD_ANGLE_INFLUENCE
-	if angle_to_wall <= 0 or angle_to_wall >= PI:
-		angle_to_rotate = -angle_to_rotate
-	var move_direction := wall_normal.rotated(Vector3.UP, angle_to_rotate).normalized()
-	
-	if fall_timer.is_stopped() or run_released:
-		player.velocity.y -= player.gravity * delta * FALL_GRAVITY_MULTIPLIER
+	if fall_timer.is_stopped():
+		player.velocity.y -= player.gravity * delta * fall_gravity_multiplier
 	else:
 		player.velocity.y = 0
 

@@ -12,9 +12,10 @@ func _ready():
 			continue
 		states[node.name.to_lower()] = node
 		node.transitioned.connect(_on_state_transition)
-	
+
+func initialize():
 	if initial_state:
-		initial_state.enter()
+		initial_state.enter({})
 		current_state = initial_state
 
 func _process(delta):
@@ -27,7 +28,7 @@ func _physics_process(delta):
 		return
 	current_state.physics_process(delta)
 
-func _on_state_transition(state: State, new_state_name: String):
+func _on_state_transition(state: State, new_state_name: String, params: Dictionary = {}):
 	if state != current_state:
 		return
 	
@@ -36,6 +37,6 @@ func _on_state_transition(state: State, new_state_name: String):
 		return
 	
 	if current_state:
-		current_state.exit()
-	new_state.enter()
+		current_state.exit(params)
+	new_state.enter(params)
 	current_state = new_state

@@ -1,6 +1,6 @@
 extends PlayerMovementState
 
-func enter():
+func enter(_params: Dictionary):
 	player.velocity = Vector3.ZERO
 	animator.set("parameters/ground_air_transition/transition_request", "grounded")
 
@@ -14,11 +14,9 @@ func physics_process(delta):
 		super.physics_process(delta)
 		return
 	
-	player.velocity.y -= player.gravity * delta
+	var move_direction = get_movement_direction()
 	
-	var move_direction := Vector3.ZERO
-	move_direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	move_direction.z = Input.get_action_strength("move_backwards") - Input.get_action_strength("move_forwards")
+	player.velocity.y -= player.gravity * delta
 	
 	if move_direction != Vector3.ZERO:
 		if Input.is_action_pressed("run"):
