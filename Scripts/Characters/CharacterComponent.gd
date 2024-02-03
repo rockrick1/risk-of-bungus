@@ -6,7 +6,7 @@ const health_indicator_scene = preload("res://Scenes/Effects/health_indicator.ts
 signal stats_updated
 signal died
 
-@export var base_health := 15
+@export var base_health := 15.0
 @export var base_speed := 2.0
 @export var base_run_speed := 5.0
 @export var base_jump_strength := 15.0
@@ -18,7 +18,7 @@ signal died
 @onready var heal_cooldown := $HealCooldown
 @onready var heal_timer := $HealTimer
 
-var _max_health_buff : int
+var _max_health_buff : float
 var _speed_buff : float
 var _damage_buff : float
 var _passive_healing_buff : float
@@ -26,7 +26,7 @@ var _attack_speed_buff : float
 
 var items := {}
 
-var max_health : int:
+var max_health : float:
 	get:
 		return base_health + _max_health_buff
 var walk_speed : float:
@@ -68,7 +68,7 @@ func add_buff(type: BuffInfo.Type, amount: float):
 		BuffInfo.Type.ATTACK_SPEED:
 			_attack_speed_buff += amount
 		BuffInfo.Type.MAX_HEALTH:
-			_max_health_buff += int(amount)
+			_max_health_buff += amount
 		BuffInfo.Type.SPEED:
 			_speed_buff += amount
 		BuffInfo.Type.DAMAGE:
@@ -93,7 +93,7 @@ func apply_new_stats():
 	heal_timer.wait_time = 1 / passive_healing
 	stats_updated.emit()
 
-func take_damage(amount: int, push_force: Vector3 = Vector3.ZERO):
+func take_damage(amount: float, push_force: Vector3 = Vector3.ZERO):
 	current_health -= amount
 	heal_timer.stop()
 	heal_cooldown.start()
@@ -104,7 +104,7 @@ func take_damage(amount: int, push_force: Vector3 = Vector3.ZERO):
 		character.snap_vector = Vector3.ZERO
 		character.velocity += push_force * Vector3(.015, .02, .015)
 	
-	show_health_indicator(-amount)
+	show_health_indicator(-ceilf(amount))
 	
 	if current_health <= 0:
 		died.emit()
@@ -118,7 +118,7 @@ func show_health_indicator(amount: int):
 		instance.set_heal(amount)
 	instance.position = character.global_position + Vector3.UP
 
-func heal(amount: int):
+func heal(amount: float):
 	amount = min(amount, max_health - current_health)
 	if amount == 0:
 		return

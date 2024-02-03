@@ -9,11 +9,12 @@ func _ready():
 	rotation_tween.tween_property($MeshInstance3D, "rotation:y", 2 * PI, 3)
 	rotation_tween.tween_callback(func(): $MeshInstance3D.rotation.y = 0)
 	
-	#var float_tween = create_tween()
-	#float_tween.set_loops()
-	#float_tween.set_ease(Tween.EASE_IN_OUT)
-	#float_tween.tween_property($MeshInstance3D, "position:y", $MeshInstance3D.position.y + .5, 1)
-	#float_tween.tween_property($MeshInstance3D, "position:y", $MeshInstance3D.position.y - .5, 1)
+	var float_tween = create_tween()
+	float_tween.set_loops()
+	float_tween.set_trans(Tween.TRANS_QUAD)
+	float_tween.set_ease(Tween.EASE_IN_OUT)
+	float_tween.tween_property($MeshInstance3D, "position:y", $MeshInstance3D.position.y + .15, 2)
+	float_tween.tween_property($MeshInstance3D, "position:y", $MeshInstance3D.position.y - .15, 2)
 
 func _on_pickup_zone_body_entered(body):
 	if not body is Player:

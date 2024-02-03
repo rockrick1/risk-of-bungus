@@ -2,7 +2,7 @@ class_name BaseWeaponProjectile
 extends Area3D
 
 @export var base_speed := 120.0
-@export var base_damage := 10
+@export var base_damage := 10.0
 @export var push_force := 90
 
 var speed_buff := 1.0 #currently unused
@@ -11,7 +11,7 @@ var damage_buff := 1.0
 var _speed : float:
 	get:
 		return base_speed * speed_buff
-var _damage : int:
+var _damage : float:
 	get:
 		return base_damage * damage_buff 
 
