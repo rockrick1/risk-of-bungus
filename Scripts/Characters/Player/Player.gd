@@ -12,10 +12,11 @@ const ANIMATION_BLEND : float = 7
 @onready var spine_ik : SkeletonIK3D = $Mesh/Armature/Skeleton3D/SpineIK
 @onready var animator := $AnimationTree
 @onready var spring_arm_pivot := $SpringArmPivot
+@onready var movement_state_machine := $MovementStateMachine
 
 #TODO get these dynamically
 @onready var primary_weapon : BaseWeapon = $Rifle
-@onready var secondary_weapon : BaseWeapon = $Bazooka
+@onready var secondary_weapon : BaseWeapon = $Grapple
 
 @onready var weapon_tip : Node3D = $Mesh/Armature/Skeleton3D/NeckBone/WeaponTip
 @onready var weapon_ray : RayCast3D = $SpringArmPivot/SpringArm3D/Camera3D/RayCast3D
@@ -40,6 +41,9 @@ func get_weapon_target_vector() -> Vector3:
 	else:
 		target = (weapon_ray.target_position.z * weapon_ray.global_transform.basis.z) + weapon_ray.global_transform.origin
 	return target
+
+func grapple(target: Vector3):
+	movement_state_machine.grapple(target)
 
 func _on_primary_shot_fired():
 	primary_weapon.spawn_projectiles(weapon_tip.global_position, get_weapon_target_vector())

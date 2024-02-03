@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvpmb0tlva71n"]
+
+[ext_resource type="Script" path="res://Weapons/Secondary/Grapple.gd" id="1_8upsb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yedae"]
+albedo_color = Color(0.113725, 0.113725, 0.113725, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nwiim"]
+material = SubResource("StandardMaterial3D_yedae")
+radius = 0.03
+height = 1.0
+radial_segments = 8
+rings = 3
+
+[node name="Grapple" type="Node"]
+script = ExtResource("1_8upsb")
+
+[node name="ShotTimer" type="Timer" parent="."]
+
+[node name="Rope" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Rope"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.5)
+mesh = SubResource("CapsuleMesh_nwiim")
+skeleton = NodePath("../..")
+
+[node name="VanishTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]
+[connection signal="timeout" from="VanishTimer" to="." method="_on_vanish_timer_timeout"]

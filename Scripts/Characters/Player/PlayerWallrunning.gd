@@ -43,7 +43,7 @@ func physics_process(delta):
 		return
 	
 	if not Input.is_action_pressed("run"):
-		transitioned.emit(self, "wallsliding", { "move_direction" : move_direction })
+		transitioned.emit(self, "wallsliding", { move_direction = move_direction })
 		super.physics_process(delta)
 		return
 	
