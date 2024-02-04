@@ -10,7 +10,7 @@ var wall_normal : Vector3
 var run_released : bool
 
 func enter():
-	animator.set("parameters/ground_air_transition/transition_request", "wallrunning")
+	
 	fall_timer.start()
 	
 	player_direction_on_enter = Vector3.ZERO
@@ -21,6 +21,16 @@ func enter():
 	wall_normal = player.get_wall_normal()
 	
 	run_released = false
+	
+	var wall_right_direction = Vector3(0, 1, 0).cross(wall_normal).normalized()
+	var is_wall_on_right = player_direction_on_enter.dot(wall_right_direction) > 0
+
+	if is_wall_on_right:
+		# Parede à direita, troque a animação aqui
+		animator.set("parameters/ground_air_transition/transition_request", "wallrunningflip")
+	else:
+		# Parede à esquerda, troque a animação aqui
+		animator.set("parameters/ground_air_transition/transition_request", "wallrunning")
 
 func exit():
 	fall_timer.stop()
