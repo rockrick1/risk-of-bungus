@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dqm1dkx56bsh4"
-path="res://.godot/imported/V1 - Legs.glb-112caa210763e3ecac01a8ffa37e95be.scn"
+path="res://.godot/imported/V1 - Legs.glb-bbcb1699e9b271edde065133846963c2.scn"
 
 [deps]
 
-source_file="res://Assets/Models/Characters/Partes/V1/V1 - Legs.glb"
-dest_files=["res://.godot/imported/V1 - Legs.glb-112caa210763e3ecac01a8ffa37e95be.scn"]
+source_file="res://Assets/Models/Characters/Parts/V1/V1 - Legs.glb"
+dest_files=["res://.godot/imported/V1 - Legs.glb-bbcb1699e9b271edde065133846963c2.scn"]
 
 [params]
 

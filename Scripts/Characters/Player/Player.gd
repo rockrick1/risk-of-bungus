@@ -16,7 +16,7 @@ const ANIMATION_BLEND : float = 7
 
 #TODO get these dynamically
 @onready var primary_weapon : BaseWeapon = $Rifle
-@onready var secondary_weapon : BaseWeapon = $Grapple
+@onready var secondary_weapon : BaseWeapon = $Bazooka
 
 @onready var weapon_tip : Node3D = $Mesh/Armature/Skeleton3D/NeckBone/WeaponTip
 @onready var weapon_ray : RayCast3D = $SpringArmPivot/SpringArm3D/Camera3D/RayCast3D

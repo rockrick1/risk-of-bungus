@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cydob3se6o7bp"
-path="res://.godot/imported/V2 - Torso.glb-d0a4e5371a6fc8f7b60fda48cc0a0487.scn"
+uid="uid://cp2twcov4pife"
+path="res://.godot/imported/V1 - Torso.glb-81e4d5ea14f1095f5709c99403261c70.scn"
 
 [deps]
 
-source_file="res://Assets/Models/Characters/Partes/V2/V2 - Torso.glb"
-dest_files=["res://.godot/imported/V2 - Torso.glb-d0a4e5371a6fc8f7b60fda48cc0a0487.scn"]
+source_file="res://Assets/Models/Characters/Parts/V1/V1 - Torso.glb"
+dest_files=["res://.godot/imported/V1 - Torso.glb-81e4d5ea14f1095f5709c99403261c70.scn"]
 
 [params]
 
