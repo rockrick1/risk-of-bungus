@@ -8,7 +8,7 @@ const ANIMATION_BLEND : float = 7
 
 @onready var character_component := $CharacterComponent
 @onready var mesh : Node3D = $Mesh
-@onready var skeleton : Skeleton3D = $Mesh/Armature/Skeleton3D
+@onready var skeleton : Skeleton3D = $Mesh/Armature_011/Skeleton3D
 @onready var animator := $AnimationTree
 @onready var spring_arm_pivot := $SpringArmPivot
 @onready var movement_state_machine := $MovementStateMachine

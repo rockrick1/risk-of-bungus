@@ -7,7 +7,6 @@ extends PlayerMovementState
 var move_direction : Vector3
 
 func enter(params: Dictionary):
-	animator.set("parameters/ground_air_transition/transition_request", "grounded")
 	move_direction = params.move_direction
 
 func physics_process(delta):
