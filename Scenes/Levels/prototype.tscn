@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/Game/BaseMap.gd" id="1_b4pdv"]
 [ext_resource type="Texture2D" uid="uid://b8q44ipg8a3cq" path="res://Assets/Textures/Black.png" id="1_hwes2"]
 [ext_resource type="Texture2D" uid="uid://doyodkg1ds7td" path="res://Assets/Textures/Sky.png" id="1_rrvcb"]
-[ext_resource type="PackedScene" uid="uid://cr2ersq7g6q6f" path="res://Scenes/Characters/player.tscn" id="2_1g73n"]
 [ext_resource type="Texture2D" uid="uid://gwt4mrbmdv01" path="res://Assets/Textures/Orange.png" id="2_087ax"]
+[ext_resource type="PackedScene" uid="uid://b2ewfv1grd86i" path="res://Scenes/Characters/player.tscn" id="3_cy5gn"]
 [ext_resource type="Texture2D" uid="uid://dkpqh8de7tb3n" path="res://Assets/Textures/Green.png" id="3_qkav0"]
 [ext_resource type="Texture2D" uid="uid://6wofk4ae5yf3" path="res://Assets/Textures/White.png" id="6_dtq1q"]
 [ext_resource type="Script" path="res://Scripts/Items/ItemManager.gd" id="8_tk2d5"]
@@ -96,7 +96,7 @@ collision_mask = 0
 shape = SubResource("ConcavePolygonShape3D_v7prx")
 
 [node name="BigWall2" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.27266, 0, 5.29551, 0, 2.77976, 0, -1.05358, 0, 11.4228, -12.2709, 6.30174, -27.1164)
+transform = Transform3D(6.87351, 0, 5.56961, 0, 2.77976, 0, -3.18648, 0, 12.014, -12.2709, 6.30174, -27.1164)
 mesh = SubResource("BoxMesh_plpqy")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="BigWall2"]
@@ -104,6 +104,7 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BigWall2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 7.45058e-09, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_v7prx")
 
 [node name="Cylinder" type="MeshInstance3D" parent="."]
@@ -128,9 +129,6 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Slope/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_rit6o")
-
-[node name="Player" parent="." instance=ExtResource("2_1g73n")]
-process_priority = 1
 
 [node name="ProjectileManager" type="Node" parent="."]
 
@@ -171,6 +169,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.95209, 0.559759, 5.65107)
 
 [node name="Donut10" parent="ItemManager" instance=ExtResource("9_u66k0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.70121, 0.559758, 7.00261)
+
+[node name="Player" parent="." instance=ExtResource("3_cy5gn")]
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
