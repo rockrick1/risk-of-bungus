@@ -31,7 +31,7 @@ func physics_process(delta):
 	player.velocity.z = clamp(player.velocity.z, -h_speed, h_speed)
 	
 	if move_direction:
-		player.player_mesh.rotation.y = lerp_angle(player.player_mesh.rotation.y, atan2(player.velocity.x, player.velocity.z), player.LERP_VALUE)
+		player.mesh.rotation.y = lerp_angle(player.mesh.rotation.y, atan2(player.velocity.x, player.velocity.z), player.LERP_VALUE)
 	
 	if player.is_on_floor():
 		player.snap_vector = Vector3.DOWN

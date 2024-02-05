@@ -7,9 +7,8 @@ const ANIMATION_BLEND : float = 7
 @export var gravity : float = 50.0
 
 @onready var character_component := $CharacterComponent
-@onready var player_mesh : Node3D = $Skeleton_Player_Robot
+@onready var mesh : Node3D = $Mesh
 @onready var skeleton : Skeleton3D = $Mesh/Armature/Skeleton3D
-@onready var spine_ik : SkeletonIK3D = $Skeleton_Player_Robot/Armature_011/Skeleton3D/SpineIK
 @onready var animator := $AnimationTree
 @onready var spring_arm_pivot := $SpringArmPivot
 @onready var movement_state_machine := $MovementStateMachine
@@ -18,7 +17,11 @@ const ANIMATION_BLEND : float = 7
 @onready var primary_weapon : BaseWeapon = $Rifle
 @onready var secondary_weapon : BaseWeapon = $Bazooka
 
-@onready var weapon_tip : Node3D = $Mesh/Armature/Skeleton3D/NeckBone/WeaponTip
+@onready var right_weapon_tip : Node3D = $Mesh/Armature_011/Skeleton3D/R_ForeArm/WeaponTip
+@onready var left_weapon_tip : Node3D = $Mesh/Armature_011/Skeleton3D/L_ForeArm/WeaponTip
+@onready var right_weapon_ik : WeaponIK = $Mesh/Armature_011/Skeleton3D/RightArmIK
+@onready var left_weapon_ik : WeaponIK = $Mesh/Armature_011/Skeleton3D/LeftArmIK
+
 @onready var weapon_ray : RayCast3D = $SpringArmPivot/SpringArm3D/Camera3D/RayCast3D
 
 var cc : CharacterComponent:
@@ -31,7 +34,6 @@ func _ready():
 	cc.died.connect(_on_died)
 	primary_weapon.shot_fired.connect(_on_primary_shot_fired)
 	secondary_weapon.shot_fired.connect(_on_secondary_shot_fired)
-	spine_ik.start()
 	$MovementStateMachine.initialize()
 
 func get_weapon_target_vector() -> Vector3:
@@ -46,10 +48,13 @@ func grapple(target: Vector3):
 	movement_state_machine.grapple(target)
 
 func _on_primary_shot_fired():
-	primary_weapon.spawn_projectiles(weapon_tip.global_position, get_weapon_target_vector())
+	primary_weapon.spawn_projectiles(right_weapon_tip.global_position, get_weapon_target_vector())
+	right_weapon_ik.startIK()
 
 func _on_secondary_shot_fired():
-	secondary_weapon.spawn_projectiles(weapon_tip.global_position, get_weapon_target_vector())
+	secondary_weapon.spawn_projectiles(left_weapon_tip.global_position, get_weapon_target_vector())
+	left_weapon_ik.startIK()
 
 func _on_died():
 	print("YOU DIED!!!")
+
