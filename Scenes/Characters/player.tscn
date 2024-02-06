@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c6kvg8ol0o2em"]
+[gd_scene load_steps=35 format=3 uid="uid://c6kvg8ol0o2em"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Player.gd" id="1_fa2ot"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerMovementStateMachine.gd" id="2_ng3tc"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Scripts/Characters/Player/SpringArmPivot.gd" id="10_k8tqn"]
 [ext_resource type="PackedScene" uid="uid://w6nnax4sheho" path="res://Scenes/Weapons/Primary/rifle.tscn" id="11_so0pk"]
 [ext_resource type="PackedScene" uid="uid://dus8iddj08o34" path="res://Scenes/Weapons/Secondary/bazooka.tscn" id="12_cu7y0"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/WeaponIK.gd" id="12_ox4fi"]
 [ext_resource type="Animation" uid="uid://dmjn6o5oudtcg" path="res://Assets/Animations/Robot_Animations/A-Pose.res" id="14_st0a6"]
 [ext_resource type="Animation" uid="uid://boo5w6fc11uwd" path="res://Assets/Animations/Robot_Animations/Idle.res" id="15_h44im"]
 [ext_resource type="Animation" uid="uid://cynconlbkv7ng" path="res://Assets/Animations/Robot_Animations/Run.res" id="16_pk5a7"]
@@ -229,11 +230,29 @@ transform = Transform3D(0.277277, 0.384409, -0.880538, 0.219658, -0.917563, -0.3
 [node name="L_ForeArm" parent="Mesh/Armature_011/Skeleton3D" index="12"]
 transform = Transform3D(0.571272, 0.0341218, -0.820052, -0.492402, -0.78511, -0.375689, -0.65665, 0.618415, -0.43171, 0.452551, 1.50591, 0.153783)
 
-[node name="RightArmIK" parent="Mesh/Armature_011/Skeleton3D" index="13"]
+[node name="RightArmIK" type="SkeletonIK3D" parent="Mesh/Armature_011/Skeleton3D"]
+process_priority = 1
+root_bone = &"RightArm"
+tip_bone = &"RightHand"
+interpolation = 0.0
 target_node = NodePath("../../../../SpringArmPivot/SpringArm3D/Camera3D/ArmIKTarget")
+script = ExtResource("12_ox4fi")
 
-[node name="LeftArmIK" parent="Mesh/Armature_011/Skeleton3D" index="14"]
+[node name="Timer" type="Timer" parent="Mesh/Armature_011/Skeleton3D/RightArmIK"]
+wait_time = 3.0
+one_shot = true
+
+[node name="LeftArmIK" type="SkeletonIK3D" parent="Mesh/Armature_011/Skeleton3D"]
+process_priority = 1
+root_bone = &"LeftArm"
+tip_bone = &"LeftHand"
+interpolation = 0.0
 target_node = NodePath("../../../../SpringArmPivot/SpringArm3D/Camera3D/ArmIKTarget")
+script = ExtResource("12_ox4fi")
+
+[node name="Timer" type="Timer" parent="Mesh/Armature_011/Skeleton3D/LeftArmIK"]
+wait_time = 3.0
+one_shot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.908729, 0)
@@ -279,5 +298,8 @@ parameters/ground_air_transition/current_state = "grounded"
 parameters/ground_air_transition/transition_request = ""
 parameters/ground_air_transition/current_index = 0
 parameters/iwr_blend/blend_amount = -1.0
+
+[connection signal="timeout" from="Mesh/Armature_011/Skeleton3D/RightArmIK/Timer" to="Mesh/Armature_011/Skeleton3D/RightArmIK" method="_on_timer_timeout"]
+[connection signal="timeout" from="Mesh/Armature_011/Skeleton3D/LeftArmIK/Timer" to="Mesh/Armature_011/Skeleton3D/LeftArmIK" method="_on_timer_timeout"]
 
 [editable path="Mesh/Armature_011/Skeleton3D"]
