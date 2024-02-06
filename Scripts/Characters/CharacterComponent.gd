@@ -102,7 +102,7 @@ func take_damage(amount: float, push_force: Vector3 = Vector3.ZERO):
 		character.apply_force(push_force)
 	elif character is CharacterBody3D:
 		character.snap_vector = Vector3.ZERO
-		character.velocity += push_force * Vector3(.015, .02, .015)
+		character.velocity = push_force * Vector3(.015, .02, .015)
 	
 	show_health_indicator(-ceilf(amount))
 	

@@ -265,7 +265,7 @@ script = ExtResource("10_k8tqn")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.75, 0)
 collision_mask = 16
 shape = SubResource("SphereShape3D_1vvpf")
-spring_length = 2.0
+spring_length = 4.0
 margin = 0.2
 
 [node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D"]
