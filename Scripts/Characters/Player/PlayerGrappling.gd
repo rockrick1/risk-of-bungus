@@ -1,8 +1,8 @@
 extends PlayerMovementState
 
-@export var base_force := 2.0
-@export var air_control := 3.0
-@export var upward_force := 2.0
+@export var base_force := 25.0
+@export var air_control := 5.0
+@export var upward_force := 10.0
 
 var target : Vector3
 var just_entered := true

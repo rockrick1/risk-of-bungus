@@ -36,6 +36,16 @@ func _ready():
 	secondary_weapon.shot_fired.connect(_on_secondary_shot_fired)
 	$MovementStateMachine.initialize()
 
+func _process(_delta):
+	if Input.is_key_pressed(KEY_1):
+		secondary_weapon.shot_fired.disconnect(_on_secondary_shot_fired)
+		secondary_weapon = $Bazooka
+		secondary_weapon.shot_fired.connect(_on_secondary_shot_fired)
+	if Input.is_key_pressed(KEY_2):
+		secondary_weapon.shot_fired.disconnect(_on_secondary_shot_fired)
+		secondary_weapon = $Grapple
+		secondary_weapon.shot_fired.connect(_on_secondary_shot_fired)
+
 func get_weapon_target_vector() -> Vector3:
 	var target : Vector3
 	if weapon_ray.is_colliding() and (weapon_ray.get_collision_point() - weapon_ray.global_transform.origin).length() > 0.2:
