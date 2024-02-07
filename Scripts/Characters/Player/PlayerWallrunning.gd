@@ -10,7 +10,7 @@ const WALL_INWARD_ANGLE_INFLUENCE := .02
 var player_direction_on_enter : Vector3
 var wall_normal : Vector3
 var move_direction : Vector3
-var is_wall_on_right : bool
+var is_wall_on_left : bool
 
 func enter(_params: Dictionary):
 	fall_timer.start()
@@ -33,9 +33,9 @@ func setup_directions():
 
 func setup_animation():
 	var wall_right_direction = Vector3.UP.cross(wall_normal)
-	is_wall_on_right = player_direction_on_enter.dot(wall_right_direction) > 0
+	is_wall_on_left = player_direction_on_enter.dot(wall_right_direction) > 0
 
-	if is_wall_on_right:
+	if is_wall_on_left:
 		animator.set("parameters/ground_air_transition/transition_request", "wallrunningflip")
 	else:
 		animator.set("parameters/ground_air_transition/transition_request", "wallrunning")
@@ -55,7 +55,7 @@ func physics_process(delta):
 	if not Input.is_action_pressed("run"):
 		transitioned.emit(self, "wallsliding", { 
 				move_direction = move_direction,
-				is_wall_on_right = is_wall_on_right })
+				is_wall_on_left = is_wall_on_left })
 		super.physics_process(delta)
 		return
 	
