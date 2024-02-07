@@ -7,6 +7,10 @@ extends PlayerMovementState
 var move_direction : Vector3
 
 func enter(params: Dictionary):
+	if params.is_wall_on_left:
+		animator.set("parameters/ground_air_transition/transition_request", "wallslideflip")
+	else:
+		animator.set("parameters/ground_air_transition/transition_request", "wallslide")
 	move_direction = params.move_direction
 
 func physics_process(delta):
