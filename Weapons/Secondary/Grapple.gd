@@ -1,8 +1,8 @@
 extends BaseWeapon
 
-@export var grapple_range : float = 20
+@export var grapple_range : float = 35.0
 
-@onready var rope := $Rope
+@onready var rope : Node3D = $Rope
 
 func _init():
 	action = "secondary_shoot"
