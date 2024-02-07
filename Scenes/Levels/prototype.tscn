@@ -101,7 +101,7 @@ collision_mask = 0
 shape = SubResource("ConcavePolygonShape3D_v7prx")
 
 [node name="BigWall3" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.50246, 0, 0.566322, 0, 2.77976, 0, -0.11267, 0, 12.5778, -6.66462, 3.03167, 32.9322)
+transform = Transform3D(1.07739, 0, 0.553207, 0, 2.78698, 0, -0.0485083, 0, 12.2865, -7.42424, -0.274478, 32.5675)
 material_override = SubResource("ShaderMaterial_anlvn")
 mesh = SubResource("BoxMesh_plpqy")
 
@@ -110,6 +110,71 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BigWall3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_v7prx")
+
+[node name="BigWall4" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.50246, 0, 0.566322, 0, 12.9393, 0, -0.11267, 0, 12.5778, -40.9681, 25.1835, 42.9915)
+material_override = SubResource("ShaderMaterial_anlvn")
+mesh = SubResource("BoxMesh_plpqy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BigWall4"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BigWall4/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_v7prx")
+
+[node name="BigWall6" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.50246, 0, 0.566322, 0, 12.4658, 0, -0.11267, 0, 12.5778, -40.9681, 26.7191, 24.2218)
+material_override = SubResource("ShaderMaterial_anlvn")
+mesh = SubResource("BoxMesh_plpqy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BigWall6"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BigWall6/StaticBody3D"]
+transform = Transform3D(1, 0, -1.49012e-08, 0, 1, 0, -9.31323e-10, 0, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_v7prx")
+
+[node name="BigWall5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.22465, 0, 0.553302, 0, 2.77976, 0, -0.0551384, 0, 12.2886, -19.5432, 3.4992, 33.5055)
+material_override = SubResource("ShaderMaterial_anlvn")
+mesh = SubResource("BoxMesh_plpqy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BigWall5"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BigWall5/StaticBody3D"]
+transform = Transform3D(1, 0, -1.49012e-08, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_v7prx")
+
+[node name="BigWall7" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.50246, 0, 0.566322, 0, 2.77976, 0, -0.11267, 0, 12.5778, -65.6859, 11.7978, 33.5055)
+material_override = SubResource("ShaderMaterial_anlvn")
+mesh = SubResource("BoxMesh_plpqy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BigWall7"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BigWall7/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0185528, 0, -0.000166893)
+shape = SubResource("ConcavePolygonShape3D_v7prx")
+
+[node name="BigWall8" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.50246, 0, 0.566322, 0, 2.77976, 0, -0.11267, 0, 12.5778, -15.1359, 24.9193, 33.5055)
+material_override = SubResource("ShaderMaterial_anlvn")
+mesh = SubResource("BoxMesh_plpqy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BigWall8"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BigWall8/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0185528, 0, -0.000166893)
 shape = SubResource("ConcavePolygonShape3D_v7prx")
 
 [node name="BigWall2" type="MeshInstance3D" parent="."]
