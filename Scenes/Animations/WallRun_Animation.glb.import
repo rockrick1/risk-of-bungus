@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bgvik41tyke2t"
-path="res://.godot/imported/WallRun_Animation.glb-1076e85e3569e4a75f3620d3c429333b.scn"
+path="res://.godot/imported/WallRun_Animation.glb-929ca1a3452899c4493f838c201a1bb4.scn"
 
 [deps]
 
-source_file="res://WallRun_Animation.glb"
-dest_files=["res://.godot/imported/WallRun_Animation.glb-1076e85e3569e4a75f3620d3c429333b.scn"]
+source_file="res://Scenes/Animations/WallRun_Animation.glb"
+dest_files=["res://.godot/imported/WallRun_Animation.glb-929ca1a3452899c4493f838c201a1bb4.scn"]
 
 [params]
 

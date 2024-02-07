@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c6kvg8ol0o2em"]
+[gd_scene load_steps=39 format=3 uid="uid://c6kvg8ol0o2em"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Player.gd" id="1_fa2ot"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerMovementStateMachine.gd" id="2_ng3tc"]
@@ -19,8 +19,11 @@
 [ext_resource type="Animation" uid="uid://cynconlbkv7ng" path="res://Assets/Animations/Robot_Animations/Run.res" id="16_pk5a7"]
 [ext_resource type="Animation" uid="uid://ds5csvtopdesw" path="res://Assets/Animations/Robot_Animations/Walk.res" id="17_buyvi"]
 [ext_resource type="Animation" uid="uid://dlucu67xitj0u" path="res://Assets/Animations/Robot_Animations/Jump.res" id="18_x5gcg"]
-[ext_resource type="Animation" path="res://Assets/Animations/Robot_Animations/Wall_Run.res" id="19_ymtnk"]
+[ext_resource type="Animation" uid="uid://cr4on5m3g6asf" path="res://Assets/Animations/Robot_Animations/Wall_Run.res" id="19_ymtnk"]
 [ext_resource type="Animation" uid="uid://bnhsuctum4nua" path="res://Assets/Animations/Robot_Animations/Wall_Run_Flipped.res" id="21_ednmn"]
+[ext_resource type="Animation" uid="uid://n1a5b31mh2tu" path="res://Assets/Animations/Robot_Animations/Jump_V2.res" id="22_piyro"]
+[ext_resource type="Animation" uid="uid://ckp3d81k01yci" path="res://Assets/Animations/Robot_Animations/Wall_Slide.res" id="23_pprg0"]
+[ext_resource type="Animation" uid="uid://cjakn4o3smlrr" path="res://Assets/Animations/Robot_Animations/Wall_Slide_Flip.res" id="24_553rj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k6p7c"]
 radius = 0.283343
@@ -34,14 +37,17 @@ _data = {
 "A-Pose": ExtResource("14_st0a6"),
 "Idle": ExtResource("15_h44im"),
 "Jump": ExtResource("18_x5gcg"),
+"Jump_V2": ExtResource("22_piyro"),
 "Run": ExtResource("16_pk5a7"),
 "Walk": ExtResource("17_buyvi"),
 "Wall_Run": ExtResource("19_ymtnk"),
-"Wall_Run_Flipped": ExtResource("21_ednmn")
+"Wall_Run_Flipped": ExtResource("21_ednmn"),
+"Wall_Slide": ExtResource("23_pprg0"),
+"Wall_Slide_Flip": ExtResource("24_553rj")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kddly"]
-animation = &"Animations/Jump"
+animation = &"Animations/Jump_V2"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c5mnv"]
 animation = &"Animations/Idle"
@@ -58,6 +64,12 @@ animation = &"Animations/Wall_Run"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6dkbq"]
 animation = &"Animations/Wall_Run_Flipped"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2kgbn"]
+animation = &"Animations/Wall_Slide"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wi3pu"]
+animation = &"Animations/Wall_Slide_Flip"
+
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_yd3cn"]
 input_0/name = "grounded"
 input_0/auto_advance = false
@@ -71,11 +83,16 @@ input_2/reset = true
 input_3/name = "wallrunningflip"
 input_3/auto_advance = false
 input_3/reset = true
+input_4/name = "wallslide"
+input_4/auto_advance = false
+input_4/reset = true
+input_5/name = "wallslideflip"
+input_5/auto_advance = false
+input_5/reset = true
 
 [sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_xsbwb"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2l6dj"]
-graph_offset = Vector2(-283.095, 487.383)
 nodes/Air/node = SubResource("AnimationNodeAnimation_kddly")
 nodes/Air/position = Vector2(80, 420)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_c5mnv")
@@ -83,17 +100,21 @@ nodes/Idle/position = Vector2(80, 640)
 nodes/Run/node = SubResource("AnimationNodeAnimation_x57s3")
 nodes/Run/position = Vector2(80, 840)
 nodes/Walk/node = SubResource("AnimationNodeAnimation_otf6w")
-nodes/Walk/position = Vector2(80, 1060)
+nodes/Walk/position = Vector2(80, 960)
 nodes/Wall_Run/node = SubResource("AnimationNodeAnimation_lanya")
-nodes/Wall_Run/position = Vector2(80, 1260)
+nodes/Wall_Run/position = Vector2(80, 1080)
 nodes/Wall_Run_Flip/node = SubResource("AnimationNodeAnimation_6dkbq")
-nodes/Wall_Run_Flip/position = Vector2(80, 1480)
+nodes/Wall_Run_Flip/position = Vector2(80, 1200)
+nodes/Wall_Slide/node = SubResource("AnimationNodeAnimation_2kgbn")
+nodes/Wall_Slide/position = Vector2(80, 1320)
+nodes/Wall_Slide_Flip/node = SubResource("AnimationNodeAnimation_wi3pu")
+nodes/Wall_Slide_Flip/position = Vector2(100, 1460)
 nodes/ground_air_transition/node = SubResource("AnimationNodeTransition_yd3cn")
 nodes/ground_air_transition/position = Vector2(640, 740)
 nodes/iwr_blend/node = SubResource("AnimationNodeBlend3_xsbwb")
 nodes/iwr_blend/position = Vector2(440, 760)
 nodes/output/position = Vector2(920, 740)
-node_connections = [&"ground_air_transition", 0, &"iwr_blend", &"ground_air_transition", 1, &"Air", &"ground_air_transition", 2, &"Wall_Run", &"ground_air_transition", 3, &"Wall_Run_Flip", &"iwr_blend", 0, &"Idle", &"iwr_blend", 1, &"Walk", &"iwr_blend", 2, &"Run", &"output", 0, &"ground_air_transition"]
+node_connections = [&"ground_air_transition", 0, &"iwr_blend", &"ground_air_transition", 1, &"Air", &"ground_air_transition", 2, &"Wall_Run", &"ground_air_transition", 3, &"Wall_Run_Flip", &"ground_air_transition", 4, &"Wall_Slide", &"ground_air_transition", 5, &"Wall_Slide_Flip", &"iwr_blend", 0, &"Idle", &"iwr_blend", 1, &"Walk", &"iwr_blend", 2, &"Run", &"output", 0, &"ground_air_transition"]
 
 [node name="Player" type="CharacterBody3D"]
 collision_mask = 28
