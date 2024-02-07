@@ -8,9 +8,12 @@ const WALL_INWARD_ANGLE_INFLUENCE := .02
 
 @onready var fall_timer := $FallTimer
 
+
 var player_direction_on_enter : Vector3
 var wall_normal : Vector3
 var move_direction : Vector3
+
+
 
 func enter(_params: Dictionary):
 	fall_timer.start()
@@ -39,6 +42,7 @@ func setup_animation():
 		animator.set("parameters/ground_air_transition/transition_request", "wallrunningflip")
 	else:
 		animator.set("parameters/ground_air_transition/transition_request", "wallrunning")
+	
 
 func physics_process(delta):
 	var wants_jump := Input.is_action_just_pressed("jump")
@@ -58,8 +62,10 @@ func physics_process(delta):
 	
 	if fall_timer.is_stopped():
 		player.velocity.y -= player.gravity * delta * fall_gravity_multiplier
+		
 	else:
 		player.velocity.y = 0
+		
 
 	var h_speed := cc.run_speed
 	player.velocity.x = move_direction.x * h_speed
