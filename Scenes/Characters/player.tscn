@@ -1,18 +1,16 @@
-[gd_scene load_steps=42 format=3 uid="uid://c6kvg8ol0o2em"]
+[gd_scene load_steps=40 format=3 uid="uid://c6kvg8ol0o2em"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Player/Player.gd" id="1_fa2ot"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerMovementStateMachine.gd" id="2_ng3tc"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerIdle.gd" id="3_1hnpp"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerWalking.gd" id="4_nucuc"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerRunning.gd" id="5_txvdn"]
-[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerJumping.gd" id="6_6srne"]
-[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerWalljumping.gd" id="7_xt528"]
+[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerAirborne.gd" id="6_puejk"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerWallrunning.gd" id="8_iebvf"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerWallsliding.gd" id="9_mwpj2"]
 [ext_resource type="PackedScene" uid="uid://yporn14wo1uw" path="res://Scenes/Characters/character_component.tscn" id="9_rvmax"]
 [ext_resource type="PackedScene" uid="uid://bwds1u7eredxu" path="res://Scenes/Characters/player_skeleton.tscn" id="10_bm732"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/SpringArmPivot.gd" id="10_k8tqn"]
-[ext_resource type="Script" path="res://Scripts/Characters/Player/PlayerGrappling.gd" id="10_necs8"]
 [ext_resource type="PackedScene" uid="uid://w6nnax4sheho" path="res://Scenes/Weapons/Primary/rifle.tscn" id="11_so0pk"]
 [ext_resource type="PackedScene" uid="uid://dus8iddj08o34" path="res://Scenes/Weapons/Secondary/bazooka.tscn" id="12_cu7y0"]
 [ext_resource type="Script" path="res://Scripts/Characters/Player/WeaponIK.gd" id="12_ox4fi"]
@@ -139,18 +137,14 @@ player = NodePath("../..")
 script = ExtResource("5_txvdn")
 player = NodePath("../..")
 
-[node name="Jumping" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("6_6srne")
-player = NodePath("../..")
-
-[node name="Walljumping" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("7_xt528")
-start_air_control = 5
-end_air_control = 1
+[node name="Airborne" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("6_puejk")
 player = NodePath("../..")
 
 [node name="Wallrunning" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("8_iebvf")
+jump_start_air_control = 5
+jump_end_air_control = 1
 player = NodePath("../..")
 
 [node name="FallTimer" type="Timer" parent="MovementStateMachine/Wallrunning"]
@@ -159,10 +153,8 @@ one_shot = true
 
 [node name="Wallsliding" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("9_mwpj2")
-player = NodePath("../..")
-
-[node name="Grappling" type="Node" parent="MovementStateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("10_necs8")
+jump_start_air_control = 5
+jump_end_air_control = 1
 player = NodePath("../..")
 
 [node name="CharacterComponent" parent="." instance=ExtResource("9_rvmax")]
@@ -311,6 +303,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.69693)
 [node name="Bazooka" parent="." instance=ExtResource("12_cu7y0")]
 
 [node name="Grapple" parent="." instance=ExtResource("16_4aja2")]
+grapple_range = 35.0
+base_force = 25.0
+air_control = 5.0
+upward_force = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Mesh")

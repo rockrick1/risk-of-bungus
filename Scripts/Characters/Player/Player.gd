@@ -54,8 +54,8 @@ func get_weapon_target_vector() -> Vector3:
 		target = (weapon_ray.target_position.z * weapon_ray.global_transform.basis.z) + weapon_ray.global_transform.origin
 	return target
 
-func grapple(target: Vector3):
-	movement_state_machine.grapple(target)
+func grapple(params: Dictionary):
+	movement_state_machine.grapple(params)
 
 func _on_primary_shot_fired():
 	primary_weapon.spawn_projectiles(right_weapon_tip.global_position, get_weapon_target_vector())

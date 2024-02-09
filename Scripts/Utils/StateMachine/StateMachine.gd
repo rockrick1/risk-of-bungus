@@ -34,6 +34,7 @@ func _on_state_transition(state: State, new_state_name: String, params: Dictiona
 	
 	var new_state = states.get(new_state_name.to_lower())
 	if not new_state:
+		print("State %s not found in state machine!" % new_state_name)
 		return
 	
 	if current_state:

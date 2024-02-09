@@ -23,5 +23,5 @@ func get_movement_direction() -> Vector3:
 	move_direction = move_direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y).normalized()
 	return move_direction
 
-func grapple(target: Vector3):
-	transitioned.emit(self, "grappling", { target = target })
+func grapple(params: Dictionary):
+	transitioned.emit(self, "airborne", params)
