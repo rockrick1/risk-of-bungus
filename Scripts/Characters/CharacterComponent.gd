@@ -98,11 +98,16 @@ func take_damage(amount: float, push_force: Vector3 = Vector3.ZERO):
 	heal_timer.stop()
 	heal_cooldown.start()
 	
+	if character is Player:
+		var params = PlayerAirborneState.Params.new()
+		params.jump_force = push_force * Vector3(.005, .02, .005)
+		params.start_air_control = 5
+		character.push(params)
 	if character is RigidBody3D:
 		character.apply_force(push_force)
 	elif character is CharacterBody3D:
 		character.snap_vector = Vector3.ZERO
-		character.velocity = push_force * Vector3(.015, .02, .015)
+		character.velocity = push_force
 	
 	show_health_indicator(-ceilf(amount))
 	

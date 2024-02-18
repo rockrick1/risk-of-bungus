@@ -38,6 +38,6 @@ func _on_state_transition(state: State, new_state_name: String, params: Dictiona
 		return
 	
 	if current_state:
-		current_state.exit(params)
+		current_state.exit()
 	new_state.enter(params)
 	current_state = new_state

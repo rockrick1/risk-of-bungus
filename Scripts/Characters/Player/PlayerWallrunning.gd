@@ -21,7 +21,7 @@ func enter(_params: Dictionary):
 	_setup_animation()
 	player.snap_vector = -wall_normal
 
-func exit(_params: Dictionary):
+func exit():
 	fall_timer.stop()
 
 func _setup_directions():

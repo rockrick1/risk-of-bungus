@@ -32,7 +32,7 @@ func spawn_projectiles(weapon_tip: Vector3, target: Vector3):
 	params.clamp_speed = false
 	params.start_air_control = air_control
 	
-	player.grapple({ airborne_params = params })
+	player.push(params)
 	$VanishTimer.start()
 
 func _on_vanish_timer_timeout():

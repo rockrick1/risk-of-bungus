@@ -17,6 +17,7 @@ func physics_process(delta):
 	
 	var move_direction = get_movement_direction()
 	
+	player.velocity *= Vector3.UP
 	player.velocity.y -= player.gravity * delta
 	
 	if move_direction != Vector3.ZERO:

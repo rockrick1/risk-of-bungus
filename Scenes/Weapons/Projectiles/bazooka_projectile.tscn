@@ -21,7 +21,7 @@ collision_layer = 2
 collision_mask = 20
 script = ExtResource("1_lks1c")
 base_speed = 50.0
-push_force = 2000
+push_force = 35
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.981614)

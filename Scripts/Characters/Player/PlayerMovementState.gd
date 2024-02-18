@@ -2,6 +2,7 @@ class_name PlayerMovementState
 extends State
 
 @export var player : CharacterBody3D
+
 var animator : AnimationTree:
 	get:
 		return player.animator
@@ -23,5 +24,5 @@ func get_movement_direction() -> Vector3:
 	move_direction = move_direction.rotated(Vector3.UP, spring_arm_pivot.rotation.y).normalized()
 	return move_direction
 
-func grapple(params: Dictionary):
-	transitioned.emit(self, "airborne", params)
+func push(params: PlayerAirborneState.Params):
+	transitioned.emit(self, "airborne", { airborne_params = params })
