@@ -6,7 +6,7 @@ signal transitioned(State, String, Dictionary)
 func enter(_params: Dictionary):
 	pass
 
-func exit(_params: Dictionary):
+func exit():
 	pass
 
 func process(_delta):

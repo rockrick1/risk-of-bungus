@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 
 GameController="*res://Scenes/Game/game_controller.tscn"
 
+[display]
+
+window/size/viewport_width=1536
+window/size/viewport_height=864
+
 [input]
 
 move_left={

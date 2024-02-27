@@ -6,5 +6,5 @@ func _on_state_transition(state: State, new_state_name: String, params: Dictiona
 	super._on_state_transition(state, new_state_name, params)
 	state_label.text = current_state.name
 
-func grapple(target: Vector3):
-	current_state.grapple(target)
+func push(params: PlayerAirborneState.Params):
+	current_state.push(params)
