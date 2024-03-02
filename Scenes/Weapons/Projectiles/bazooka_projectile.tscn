@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Weapons/Secondary/BazookaProjectile.gd" id="1_lks1c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nhxgj"]
-size = Vector3(0.620117, 0.581055, 1.9418)
+size = Vector3(0.908203, 0.84082, 2.54297)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6qqxf"]
 radius = 0.245
@@ -24,7 +24,7 @@ base_speed = 50.0
 push_force = 2000
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.981614)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.889719)
 shape = SubResource("BoxShape3D_nhxgj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
