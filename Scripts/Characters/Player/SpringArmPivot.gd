@@ -2,7 +2,7 @@ extends Node3D
 
 const CAMERA_BLEND : float = 0.05
 const X_CLAMP_UP : float = PI/2.2
-const X_CLAMP_DOWN : float = PI/2.5
+const X_CLAMP_DOWN : float = PI/2.15
 
 @export_group("FOV")
 @export var change_fov_on_run : bool

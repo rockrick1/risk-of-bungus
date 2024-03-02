@@ -4,6 +4,7 @@ extends PlayerMovementState
 var air_control : float
 var air_control_tween : Tween
 var clamp_speed : bool
+var just_entered : bool
 
 func enter(params: Dictionary):
 	animator.set("parameters/ground_air_transition/transition_request", "air")
@@ -14,6 +15,8 @@ func enter(params: Dictionary):
 	_setup_initial_velocity(airborne_params)
 	
 	clamp_speed = airborne_params.clamp_speed
+	
+	just_entered = true
 
 func _setup_air_control(params: Params):
 	air_control = params.start_air_control
@@ -52,7 +55,7 @@ func physics_process(delta):
 	if move_direction:
 		player.mesh.rotation.y = lerp_angle(player.mesh.rotation.y, atan2(player.velocity.x, player.velocity.z), player.LERP_VALUE)
 	
-	if player.is_on_floor():
+	if player.is_on_floor() and not just_entered:
 		player.snap_vector = Vector3.DOWN
 		
 		if move_direction == Vector3.ZERO:
@@ -64,7 +67,15 @@ func physics_process(delta):
 	elif player.is_on_wall_only() and Input.is_action_pressed("run"):
 		transitioned.emit(self, "wallrunning")
 	
+	just_entered = false
+	
 	super.physics_process(delta)
+
+func push(params: PlayerAirborneState.Params):
+	_setup_air_control(params)
+	_setup_initial_velocity(params) 
+	
+	clamp_speed = params.clamp_speed
 
 class Params:
 	var clamp_speed : bool = true
